@@ -116,7 +116,7 @@ public class VariableEx5 {
 		//long iNum3 = (long)iNum1 + iNum2;
 		//System.out.println(iNum3); // 3000000000
 		
-		
+		//주석주석주석
 		
 	}
 }
