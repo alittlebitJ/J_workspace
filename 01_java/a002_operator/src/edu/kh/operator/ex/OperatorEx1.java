@@ -24,8 +24,9 @@ public class OperatorEx1 {
 	System.out.printf("%d %% %d = %d \n", input1, input2, input1 % input2);
 	// printf에서 %글자를 출력하고 싶으면 %%로 작성하면 된다
 
-
-		
+	
+	
+		 
 
 		
 		
