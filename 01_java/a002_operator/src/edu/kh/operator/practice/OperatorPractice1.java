@@ -34,6 +34,17 @@ public class OperatorPractice1 {
 		int result2 = inputCandy % inputPerson ;
 		System.out.println("남는 사탕 개수 : " + result2);
 		
+		/*	선생님 풀이
+		 *  System.out.print("인원 수 : ");
+		 *  int input1 = sc.nextInt();
+		 *  
+		 *  System.out.print("사탕 개수 : ");
+		 *  int input2 = sc.nextInt();
+		 *  		 *  
+		 *  System.out.println("\n1인당 사탕 개수 : " + input2 / inout1);
+		 *  System.out.println("남는 사탕 개수 : " + input2 % input1);
+		 */
+		
 		
 		
 		

@@ -43,6 +43,31 @@ ex.
 		
 		System.out.printf("%d학년 %d반 %d번 %s %s의 성적은 %.2f점 입니다", inputGrade, inputClass, inputNumber, inputName, inputGender, inputScore);
 		
+		/*
+		 * 선생님 풀이
+		 * 
+		 * System.out.print("이름 : ");
+		 * String name = sc.next(); // 다음에 오는 단어를 입력
+		 * 
+		 * System.out.print("학년(정수) : ");
+		 * int grade = sc.nextInt(); // 다음에 오는 정수를 입력
+		 * 
+		 * System.out.print("반(정수) : ");
+		 * int classRoom = sc.nextInt(); 
+		 * 
+		 * System.out.print("번호(정수) : ");
+		 * int number = sc.nextInt(); 
+		 * 
+		 * System.out.print("성별(남학생/여학생) : ");
+		 * String gender = sc.next();
+		 * 
+		 * System.out.print("성적(소수점 아래 둘째 자리까지) : ");
+		 * double score = sc.nextDouble();
+		 * 
+		 * System.out.printf("%d학년 %d반 %d번 %s %s의 성적은 %.2f점 입니다", grade, classRoom, number, name, gender, score);
+		 * 
+		 */
+		
 		
 	}
 	

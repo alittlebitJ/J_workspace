@@ -36,13 +36,33 @@ ex.
 		
 		int sum = inputKor + inputEng + inputMath;
 		System.out.println("합계 : " + sum);
-		double eve = (double)sum / 3;
-		System.out.println("평균 : " + eve);
+		double ave = (double)sum / 3;
+		System.out.println("평균 : " + ave);
 		
 		boolean score = (inputKor >= 40 && inputEng >= 40) && inputMath >= 40;
-		String result = score == true && eve >= 60 ? "합격" : "불합격";
+		String result = score == true && ave >= 60 ? "합격" : "불합격";
 		
 		System.out.println(result);
+		
+		
+		/* 선생님 풀이
+		 * System.out.print("국어 : ");
+		 * int kor = sc.nextInt();
+		 * 
+		 * System.out.print("영어 : ");
+		 * int eng = sc.nextInt();
+		 * 
+		 * System.out.print("수학 : ");
+		 * int math = sc.nextInt();
+		 * 
+		 * int sum = kor + eng + math;
+		 * double avg = sum/3.0;
+		 * 
+		 * System.out.println("합계 : " + sum);
+		 * System.out.println("평균 : " + avg);
+		 * 
+		 * String result = (kor >= 40 && eng >= 40 && math >= 40 && avg >= 60) ? "합격" : "불합격";		 * 
+		 */
 		
 		
 	}
