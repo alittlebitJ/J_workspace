@@ -5,7 +5,7 @@ public class ForRun {
 	public static void main(String[] args) {
 		ForEx fx = new ForEx();
 		
-		fx.ex14();
+		fx.ex22();
 		
 		
 		

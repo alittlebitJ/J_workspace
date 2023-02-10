@@ -239,30 +239,140 @@ Fail [출석 횟수 부족 (10/20)]
 		
 		double sum = midScore + lastScore + hwScore + prScore;
 		
-		String result;
+		int flag = 0;
+		/*flag 가 0인 경우 - pass 
+		 *flag 가 1인 경우 - 점수 미달
+		 *flag 가 2인 경우 - 출석 횟수 부족
+		 */
 		
-		if (prScore <= prScore * 0.7  ) {
-			System.out.printf("Fail [출석 횟수 부족 (%d/20)]", pr);
+		if (prScore <= 20 * 0.7  ) {
+			flag = 2;
 		}
-		
 		else if  (sum < 70) {
-			result = "Fail [점수 미달]";
+			flag = 1;
 		}
-
-		else {
-			result = "PASS";
-		}
-		
+	
 		
 		System.out.printf("==============결과==============");
-		System.out.printf("\n중간 고사 점수(20) : %.1f", midScore);
-		System.out.printf("\n기말 고사 점수(30) : %.1f", lastScore);
-		System.out.printf("\n과제 점수     (30): %.1f", hwScore);
-		System.out.printf("\n출석 점수     (20): %.1f", prScore);
-		System.out.printf("\n총점 : %.1f", sum);
+
+		if (flag == 2) {
+			System.out.printf("\nFail [출석 횟수 부족 (%d/20)]", pr);
+		}
+		else {
+			System.out.printf("\n중간 고사 점수(20) : %.1f", midScore);
+			System.out.printf("\n기말 고사 점수(30) : %.1f", lastScore);
+			System.out.printf("\n과제 점수     (30): %.1f", hwScore);
+			System.out.printf("\n출석 점수     (20): %.1f", prScore);
+			System.out.printf("\n총점 : %.1f", sum);
+			if (flag == 1) {
+				System.out.print("\nFail [점수 미달]");
+
+		}
+			else {
+				System.out.print("\nPASS");
+			}
+			
+		}
+
+	}
+
 	
+	public void ex6() {
+		
+
+	
+			// 산술 연산 계산기 만들기 ver.2
+			
+			Scanner sc = new Scanner(System.in);
+			
+			System.out.print("정수1 입력 : ");
+			int num1 = sc.nextInt();
+			
+			System.out.print("연산자 입력 : ");
+			String op = sc.next();
+			
+			System.out.print("정수2 입력 : ");
+			int num2 = sc.nextInt();
+			
+			int result = 0; // 연산 결과 저장용 변수
+			
+			/* 임의의 변수를 하나 생성하여 저장되는 값에 의미를 부여*/
+			int flag = 0; 
+			// 정상적인 연산인 경우 0 
+			// 연산자가 잘못된 경우 -1
+			// 0으로 나눈 경우 -2 라고 의미 부여
+			
+			switch(op) {
+			case "+" : result = num1 + num2; break;
+			case "-" : result = num1 - num2; break;
+			case "*" : result = num1 * num2; break;
+			
+			case "/" : 
+				if(num2 == 0) { // 나누는 값이 0인 경우
+					flag = -2; // flag 변수의 값을 -2로 변경
+				}else {
+					result = num1 / num2;
+				}
+				break;
+				
+			case "%" : 
+				if(num2 == 0) { // 나누는 값이 0인 경우
+					flag = -2; // flag 변수의 값을 -2로 변경
+				}else {
+					result = num1 % num2;
+				}
+				break;
+			
+			default : flag = -1; // 연산자가 잘못된 경우 flag 변수의 값을 -1로 변경
+			}
+			
+			
+			if(flag == 0) {
+				System.out.printf("%d %s %d = %d \n",num1, op ,num2, result);
+			} else if(flag == -1) {
+				System.out.println("존재하지 않는 연산자 입니다.");
+			} else {
+				System.out.println("0으로 나눌 수 없습니다.");
+			}
+				
+		
+		
+		
+		
+		
+		
+		// switch 예시 5 : break의 역할
+		
 		
 		
 	}
+	
+	
+	// 계절 판별(switch version)
+			public void ex7() {
+				Scanner sc = new Scanner(System.in);
+				
+				System.out.print("달(월) 입력 : ");
+				int month = sc.nextInt();
+				
+				String result;
+				
+				// break : 멈추다
+				// -> 해당 case를 수행한 후 멈춰라!
+				// -> break 미작성 시 다음 case가 연달아 수행된다!
+				
+				// * case 마다 꼭 코드가 작성될 필요는 없다@!
+				switch(month) {
+				case 12 : 	case 1 : 	case 2 : result = "겨울"; break;
+				case 3 : 	case 4 : 	case 5 : result = "봄"; break;
+				case 6 : 	case 7 : 	case 8 : result = "여름"; break;
+				case 9 : 	case 10 :	case 11 : result = "가을"; break;
+				default : result = "잘못 입력 하셨습니다.";
+				}
+				
+				System.out.println(result);
+				
+				
+			}
 
 }
