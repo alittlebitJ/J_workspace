@@ -127,9 +127,141 @@ public class ConditionPractice {
 	
 	public void practice4() {
 		
+		/*
+		 * 키, 몸무게를 double로 입력 받고 BMI지수를 계산하여 계산 결과에 따라
+저체중/정상체중/과체중/비만을 출력하세요.
+BMI = 몸무게 / (키(m) * 키(m))
+BMI가 18.5미만일 경우 저체중 / 18.5이상 23미만일 경우 정상체중
+BMI가 23이상 25미만일 경우 과체중 / 25이상 30미만일 경우 비만
+BMI가 30이상일 경우 고도 비만
+[실행 화면]
+키(m)를 입력해 주세요 : 1.65
+몸무게(kg)를 입력해 주세요 : 58.4
+BMI 지수 : 21.45087235996327
+정상체중
+		 */
+		Scanner sc = new Scanner(System.in);
+		System.out.print("키(m)를 입력해 주세요 : ");
+		double height = sc.nextDouble();
+		
+		System.out.print("몸무게(kg)를 입력해 주세요 : ");
+		double weight = sc.nextDouble();
+		
+		double bmi = weight / (height * height);
+		String bmiIndex;
+		
+		if (bmi < 18.5) {
+			bmiIndex = "저체중";
+		}
+		else if (bmi < 23){
+			bmiIndex = "정상체중";
+		}
+		else if (bmi <25) {
+			bmiIndex = "과체중";
+		}
+		else if (bmi <30) {
+			bmiIndex = "비만";
+		}
+		else {
+			bmiIndex = "고도 비만";
+		}
+		
+		System.out.println(bmi);
+		System.out.println(bmiIndex);
+		
+		
 	}
 	
 	public void practice5() {
+		
+		/*
+		 * 중간고사, 기말고사, 과제점수, 출석횟수를 입력하고 Pass 또는 Fail을 출력하세요.
+평가 비율은 중간고사 20%, 기말고사 30%, 과제 30%, 출석 20%로 이루어져 있고
+이 때, 출석 횟수는 총 강의 횟수 20회 중에서 출석한 날만 따진 값으로 계산하세요.
+70점 이상일 경우 Pass, 70점 미만이거나 전체 강의에 30% 이상 결석 시 Fail을 출력하세요.
+
+[실행 화면 1]
+중간 고사 점수 : 80
+기말 고사 점수 : 30
+과제
+점수 : 60
+출석 횟수 : 18
+================= 결과 =================
+중간 고사 점수(20) : 16.0
+기말 고사 점수(30) : 9.0
+과제 점수
+(30) : 18.0
+출석 점수
+(20) : 18.0
+총점 : 61.0
+Fail [점수 미달]
+▶ 실습문제5
+[실행 화면 2]
+중간 고사 점수 : 80
+기말 고사 점수 : 90
+과제
+점수 : 50
+출석 횟수 : 15
+================= 결과 =================
+중간 고사 점수(20) : 16.0
+기말 고사 점수(30) : 27.0
+과제 점수
+(30) : 15.0
+출석 점수
+(20) : 15.0
+총점 : 73.0
+PASS
+▶ 실습문제5
+[실행 화면 3]
+중간 고사 점수 : 100
+기말 고사 점수 : 80
+과제
+점수 : 40
+출석 횟수 : 10
+================= 결과 =================
+Fail [출석 횟수 부족 (10/20)]
+		 */
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.print("중간 고사 점수 : ");
+		int mid = sc.nextInt();
+		System.out.print("기말 고사 점수 : ");
+		int last = sc.nextInt();
+		System.out.print("과제 점수 : ");
+		int hw = sc.nextInt();
+		System.out.print("출석 횟수 : ");
+		int pr = sc.nextInt();
+		
+		double midScore = mid * 0.2;
+		double lastScore = last * 0.3;
+		double hwScore = hw * 0.3;
+		double prScore = pr;
+		
+		double sum = midScore + lastScore + hwScore + prScore;
+		
+		String result;
+		
+		if (prScore <= prScore * 0.7  ) {
+			System.out.printf("Fail [출석 횟수 부족 (%d/20)]", pr);
+		}
+		
+		else if  (sum < 70) {
+			result = "Fail [점수 미달]";
+		}
+
+		else {
+			result = "PASS";
+		}
+		
+		
+		System.out.printf("==============결과==============");
+		System.out.printf("\n중간 고사 점수(20) : %.1f", midScore);
+		System.out.printf("\n기말 고사 점수(30) : %.1f", lastScore);
+		System.out.printf("\n과제 점수     (30): %.1f", hwScore);
+		System.out.printf("\n출석 점수     (20): %.1f", prScore);
+		System.out.printf("\n총점 : %.1f", sum);
+	
+		
 		
 	}
 
