@@ -29,9 +29,8 @@ public class VariableEx3 {
 		final int CONSTANT_NUMBER = 100;
 		
 		// 활용법
-		final double PI = 3.14;
-		double result = PI * 10 * 10;
-		System.out.println(result);
+
+
 		
 		
 		// final 은 주로 청소기나 기계쪽 프로그래밍을 하는데 쓰인다

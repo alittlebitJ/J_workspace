@@ -187,6 +187,13 @@ ex.
 			}
 			System.out.println();
 		}
+		/*
+		 * for (int row=input; row>=1; row--) {
+		 * 	for(int col=row; col>=1; col--){
+		 * 
+		 * 	}
+		 * 	}
+		 */
 	}
 	
 	
@@ -206,34 +213,140 @@ ex.
 ****
 		 */
 
+
+		
 		Scanner sc = new Scanner(System.in);
 		System.out.print("정수 입력 : ");
-		int num = sc.nextInt();
-		for (int x=num; x>=1; x--) {
-			for(int i=1; i<=x-1; i++) {
+		int input = sc.nextInt();
+		for (int row=1; row<=input; row++) {
+			for(int col=input-row; row>=0; row--) {
 				System.out.print(" ");
 			}
-			for(int i=1; i<=num-(x-1); i++) {
-				System.out.print("*");
+			for(int col=1; col<=input; col++) {	
 			}
-		System.out.println();
-		}
+			}
 		}
 			
 	
 
 	public void practice10() {
 		/*
-		 * 
+		 * ex.
+정수 입력 : 3
+*
+**
+***
+**
+*
 		 */
+		
+		
+		
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.print("정수 입력 : ");
+		int input = sc.nextInt();
+		int count = 1;
+		
+		for (int row=1; row<=2*input-1; row++) {
+			if (row<=input) {
+				for(int col=1; col<row; col++) {
+					System.out.print("*");
+				}
+			}
+			else {
+				for(int i=row; i>=1; i--) {
+					System.out.print("*");
+					
+				}
+			}
+			System.out.println();
+		}
+		
+		
+		
 	}
 	public void practice11() {
+		
 		/*
+		 * 다음과 같은 실행 예제를 구현하세요.
+ex.
+정수 입력 : 4
+   *
+  ***
+ *****
+*******
+		 */
+		
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.print("정수 입력 : ");
+		int num = sc.nextInt();
+
+		for (int row=num; row>=1; row--) {
+			
+			for(int col=1; col<=num-row; col++) {
+				System.out.print("_");
+//			}
+//			for(int i=1; i<=x; i++) {
+//				System.out.println("*");
+			}
+			System.out.println();
+		}
+
+		
+		
+		
+		
+		
+		
+		
+		/* for문 2개로 푸는 법
+		 * for(int row=1; row<=input; row++){
+		 * 	for(int col=input-row; col>=1; col--){
+		 * 		System.out.print(" ");
+		 * 		// 빈칸 먼저 출력
+		 * 	}
+		 * 	for(int col=1; col<=row*2-1; col++{
+		 * 		System.out.pirnt("*");
+		 * 	}
+		 * 	System.out.println();
+		 * }
+		 */
+		
+		/* for문 1개, if-else 1개
+		 * for(int row=1; row<=input; row++){
+		 * 	for(int col=1; col<=inpput+row-1; col++) {
+		 * 		if(input-row>=col) {
+		 * 		 System.out.print(" ");	
+		 * 		}
+		 * 		else {
+		 * 		 System.out.print("*");
+		 * 		}
+		 * 	}
+		 * }
+		 * 
 		 */
 	}
 	public void practice12() {
 		/*
+		 * 
 		 */
+		Scanner sc = new Scanner(System.in);
+		System.out.print("정수 입력 ㅣ ");
+		int input = sc.nextInt();
+		
+		for(int row=1; row<= input; row++) {
+			for(int col=1; col<=input; col++) {
+				if (row ==1 || row ==input || col==1 || col==input) {
+				System.out.print("*");
+			}	
+			else {
+			System.out.println(); //개행
+			}
+			}
+		
+	}
 	}
 	public void practice13() {
 		/*
