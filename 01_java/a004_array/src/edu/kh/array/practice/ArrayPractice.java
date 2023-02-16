@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 public class ArrayPractice {
 
+	
+
 	public void practice1() {
 		
 		/*
@@ -86,7 +88,7 @@ public class ArrayPractice {
 	
 	
 	
-	public void practice4() {
+	public void practice4() {  // 다시 깔끔하게 풀어보기
 		
 		/*
 		 * 정수 5개를 입력 받아 배열을 초기화 하고
@@ -110,6 +112,32 @@ public class ArrayPractice {
 일치하는 값이 존재하지 않습니다.
 		 */
 		
+		Scanner sc = new Scanner(System.in);
+		int[] arr = new int[5];
+		
+		for(int i=0; i<arr.length; i++) {
+			System.out.print("입력 " + i + " : ");
+			arr[i] = sc.nextInt();
+		}
+		System.out.print("검색할 값 : ");
+		int input = sc.nextInt();
+		
+		int flag = -1;
+		
+		for(int i=0; i<arr.length; i++) {
+		
+			if(arr[i] == input) {
+				System.out.println("인덱스 : " + i);
+				flag = -1;
+			}
+			else {
+				flag =1;
+			}
+		}
+		
+		if (flag>0) {
+			System.out.println("없음");
+		}
 	}
 	
 	public void practice5() {
@@ -124,23 +152,30 @@ public class ArrayPractice {
 application에 i가 존재하는 위치(인덱스) : 4 8
 i 개수 : 2
 		 */
-		
-		
 		Scanner sc = new Scanner(System.in);
 		System.out.print("문자열 : ");
-		String input = sc.next();
+		String text = sc.next();
 		
 		System.out.print("문자 : ");
-		String search = sc.next();
-		char find = search.charAt(0);
-
-				
-		char arr[] = new char[input.length()];
+		char search = sc.next().charAt(0);
+		
+		char[] arr = new char[text.length()];
 		
 		int count = 0;
-		for(int i=0; i>arr.length; i++) {
-			arr[i] = input.charAt(i);
+		char[] where = new char [count];
+		for (int i=0; i<arr.length; i++) {
+			arr[i] = text.charAt(i);
+			if (arr[i] == search) {
+				//where[] = 
+				count++;
+			}
 		}
+		
+		System.out.printf("%s에 %s가 존재하는 위치(인덱스) : %s", text, search, where);
+		System.out.printf("%d 개수 : %d", search, count);
+		
+		
+		System.out.println("=========");
 		
 		
 		
