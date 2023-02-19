@@ -151,36 +151,34 @@ public class ArrayPractice {
 application에 i가 존재하는 위치(인덱스) : 4 8
 i 개수 : 2
 		 */
+	
 		Scanner sc = new Scanner(System.in);
 		System.out.print("문자열 : ");
-		String text = sc.next();
+		String input = sc.next();
 		
 		System.out.print("문자 : ");
 		char search = sc.next().charAt(0);
 		
-		char[] arr = new char[text.length()];
-		
+		char[] inputArray = new char[input.length()];
+		int[] index = new int[input.length()];
 		int count = 0;
-		char[] where = new char [count];
-		for (int i=0; i<arr.length; i++) {
-			arr[i] = text.charAt(i);
-			if (arr[i] == search) {
-				//where[] = 
+		
+		for(int i=0; i<inputArray.length; i++) {
+			inputArray[i] = input.charAt(i);
+			if(inputArray[i] == search) {
+				index[count] = i;
 				count++;
 			}
 		}
 		
-		System.out.printf("%s에 %s가 존재하는 위치(인덱스) : %s", text, search, where);
-		System.out.printf("%d 개수 : %d", search, count);
-		
-		
-		System.out.println("=========");
-		
-		
-		
+		System.out.printf("%s에 %c가 존재하는 위치(인덱스) : ", input, search);
+		for(int i=0; i<count; i++) {
+			System.out.print(index[i] + " ");
+		}
+		System.out.printf("\n%c의 개수 : %d", search, count);
 	}
 	
-	public void practice6() { 
+	public void practice6() { // 다시 깔끔하게 풀어보기
 		
 		/*사용자가 배열의 길이를 직접 입력하여 그 값만큼 정수형 배열을 선언 및 할당하고
 		 * 배열의 크기만큼 사용자가 직접 값을 입력하여 각각의 인덱스에 값을 초기화 하세요.
@@ -241,7 +239,7 @@ i 개수 : 2
 	
 	
 	
-	public void practice8() {   // ** -넣으면 에러남, 감소하는 경우 설정 못 함
+	public void practice8() {   // ** 배열의 크기를 음수로 설정하면 에러가 남으로 조심
 		
 		/*3이상인 홀수를 입력 받아 배열의 중간까지는 1부터 1씩 증가하여 오름차순으로 값을 넣고,
 중간 이후부터 끝까지는 1씩 감소하여 내림차순으로 값을 넣어 출력하세요.
@@ -254,15 +252,16 @@ i 개수 : 2
 			
 			System.out.print("정수 : ");
 			int num = sc.nextInt();
-			int arr[] = new int[num];
+
 			
 			if (num >= 3 && num % 2 == 1) {
+				int arr[] = new int[num];
 				for (int i=0; i<arr.length; i++) {
 					if (i < num/2) { // 2.5
 						arr[i] = i+1;
 					}
 					else {
-						arr[i] = 0;
+						arr[i] = (num)-i;
 					}
 					System.out.print(arr[i] + " ");
 				}
@@ -346,24 +345,23 @@ i 개수 : 2
 	
 	}
 	
-	public void practice11_1() { // ** 다시~
-		
-		
+	public void practice11_1() { 
 		
 		int[] arr = new int[10];
-		for(int num=0; num<arr.length; num++) {
-			arr[num] = (int)(Math.random()*10+1);
-			for(int check=num-1; check>=0; check--) {
-				if(arr[check]==arr[num]) {
-					arr[num] = (int)(Math.random()*10+1);
+		for(int i=0; i<arr.length; i++) {
+			arr[i] = (int)(Math.random()*10+1);
+			for(int j=0; j<i; j++) {
+				if(arr[i] == arr[j]) {
+					i--;
+					break;
 				}
 			}
-			System.out.print(arr[num] + " ");
 		}
-		
+		for(int i=0; i<arr.length; i++) {
+			System.out.print(arr[i] + " ");
+		}
+	
 	}
-	
-	
 	
 	public void practice12() {
 
@@ -373,7 +371,36 @@ i 개수 : 2
 		 * (중복 값 없이 오름차순으로 정렬하여 출력하세요.)
 		 */
 		
-	}
+		int[] arr = new int[10];
+		int temp = 0;
+		for(int i=0; i<arr.length; i++) {
+			arr[i] = (int)(Math.random()*10+1);
+			for(int j=0; j<i; j++) {
+				if(arr[i] == arr[j]) {
+					i--;
+					break;
+				}
+			}
+		}
+		for(int i=0; i<arr.length; i++) {
+			for(int j=0; j<i; j++) {
+				if(arr[j] > arr[i]) {
+					temp = arr[j];
+					arr[j] = arr[i];
+					arr[i] = temp;
+				}
+			}
+		}
+		for(int i=0; i<arr.length; i++) {
+			System.out.print(arr[i] + " ");
+		}
+		}
+	
+		
+		
+		
+		
+	
 	
 	
 	public void practice13() {
@@ -382,6 +409,36 @@ i 개수 : 2
 		 * 문자열을 입력 받아 문자열에 어떤 문자가 들어갔는지 배열에 저장하고
 		 * 문자의 개수와 함께 출력하세요. (중복 제거)
 		 */
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.print("문자열 : ");
+		String text = sc.next();
+		
+		char[] arr = new char[text.length()];
+		int count = 0;
+		
+		for(int i=0; i<arr.length; i++) {
+			if (count>=arr.length) {
+				break;
+			}
+			else {
+				arr[i] = text.charAt(count);
+				for(int j=0; j<i; j++) {
+					if (arr[i] == arr[j]) {
+						i--;
+						break;
+					}
+				}
+				count++;
+			}
+			
+		}
+		System.out.print("문자열에 있는 문자 : ");
+		for(int i=0; i<count-1; i++) {
+			System.out.print(arr[i] + " ");
+		}
+		System.out.println("\n문자 개수 : " + count);
+		
 		
 	}
 	
@@ -396,6 +453,49 @@ i 개수 : 2
 		 * (배열의 얕은 복사, 깊은 복사를 이용하는 문제)
 		 * 
 		 */
+		
+		int count = 0;
+		Scanner sc = new Scanner(System.in);
+		System.out.print("배열의 크기를 입력하세요 : ");
+		int size = sc.nextInt();
+		count += size;
+		
+		String[] arr = new String[1000];
+		
+		for (int i=0; i<count; i++) {
+			System.out.print((i + 1) + "번째 문자열 : ");
+			arr[i] = sc.next();
+		}
+		
+		
+		while(true) {
+			
+		System.out.print("더 값을 입력하시겠습니까?(Y/N) : ");
+		char more = sc.next().charAt(0);
+		
+		if (more == 'y') {
+			System.out.print("더 입력하고 싶은 개수 : ");
+			int moreSize = sc.nextInt();
+			for(int i=count; i<count+moreSize; i++) {
+				System.out.print((i + 1) + "번째 문자열 : ");
+				arr[i] = sc.next();
+			}
+			count += moreSize;
+		}
+		else {
+			break;
+		}
+		}
+		
+		String[] arr2 = new String[count];
+		for(int i=0; i<arr2.length; i++) {
+			arr2[i] = arr[i];
+		}
+		
+		System.out.println(Arrays.toString(arr2));
+		
+		
+		
 		
 	}
 	
@@ -471,39 +571,61 @@ i 개수 : 2
 				
 		int[][] arr = new int[4][4];
 		
-		int colSum = 0;
-		int rowSum = 0;
-		
+		/*
 		for(int row=0; row<arr.length; row++) {
 			
 			for(int col=0; col<arr[row].length; col++) {
 				
-				if (row < arr.length-1 && col < arr[row].length) {
+				if (row < arr.length-1 && col < arr[row].length-1) {
 					arr[row][col] = (int)(Math.random()*10+1);
 					System.out.printf("%3d ", arr[row][col]);
 					rowSum += arr[row][col];
 				}
-				else if(row == arr.length-1) {
+				else if(col == arr.length-1) {
 					arr[row][col] = rowSum;					
 					System.out.printf("%3d ", arr[row][col]);
+					rowSum = 0;
 				}
-				else {
-					
-				}
+				
+			}
+			System.out.println();
+		}
+		}
+		
+		for (int row1=0; row1<arr.length; row1++) {
+			for(int col=0; col<arr.length; col++) {
+				
+				arr[row1][arr.length-1] += arr[row1][col];
+				arr[arr.length-1][col] += arr[row1][col];
+				arr[arr.length-1][arr.length-1] += arr[row1][col];
+				
+			}
+		}
+		
+		
+		for (int row1=0; row1<arr.length; row1++) {
+			for (int col=0; col<arr.length; col++) {
+				System.out.print(arr[row1][col] + "\t");
 			}
 			System.out.println();
 		}
 		
 		
 		
+		
+	
+
+	
+		
 	}
+		
 	
 	
 	
+	*/
 	
 	
-	
-	public void practice19() {
+	public void practice19() { // 풀어야함
 		
 		/*
 		 * 2차원 배열의 행과 열의 크기를 사용자에게 직접 입력받되, 1~10사이 숫자가 아니면
@@ -531,7 +653,7 @@ i 개수 : 2
 	
 	
 	
-	public void practice20() {
+	public void practice20() { 
 		
 		
 		/*
