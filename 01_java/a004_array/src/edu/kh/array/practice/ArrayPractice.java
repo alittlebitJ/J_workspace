@@ -827,7 +827,7 @@ i 개수 : 2
 	}
 	
 	
-	public void practice21() {  //  while 문 무한루프 해결, 출력해야함
+	public void practice21() {  
 		
 		/*
 		 * 1차원 문자열 배열에 학생 이름 초기화되어 있다.
@@ -933,9 +933,32 @@ i 개수 : 2
 		System.out.print("검색할 학생 이름을 입력하세요 : ");
 		String input = sc.next();
 		
+		int bundan = 0;
+		int jul = 0;
+		String jjog = null;
+		boolean flag = false;
 		
-		
-		
+		for (int row=0; row<arr.length; row++) {
+			for (int col=0; col<arr[row].length; col++) {
+				if (input.equals(arr[row][col])) {
+					bundan = 1;
+					jul = row+1;
+					if(col == 0) jjog = "오른";
+					else jjog = "왼";
+					flag = true;
+				}
+				else if (input.equals(arr2[row][col])) {
+					bundan = 2;
+					jul = row+1;
+					if(col == 1) jjog = "오른";
+					else jjog = "왼";
+					flag = true;
+			}
+		}
+			
+		}
+		if (flag) System.out.printf("검색하신 %s 학생은 %d 분단 %d 번째 줄 %s쪽에 있습니다.", input, bundan, jul, jjog);
+		else System.out.println("해당 학생이 존재하지 않습니다.");
 		
 	}
 	
