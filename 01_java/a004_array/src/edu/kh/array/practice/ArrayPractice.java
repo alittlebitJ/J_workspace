@@ -442,7 +442,7 @@ i 개수 : 2
 		
 	}
 	
-	public void practice14(){
+	public void practice14(){ // scanner 다시 고치기
 		
 		/*
 		 * 사용자가 입력한 배열의 길이만큼의 String 배열을 선언 및 할당하고
@@ -454,12 +454,60 @@ i 개수 : 2
 		 * 
 		 */
 		
-		int count = 0;
-		Scanner sc = new Scanner(System.in);
-		System.out.print("배열의 크기를 입력하세요 : ");
-		int size = sc.nextInt();
-		count += size;
+		// 스캐너 사용법
+		// 1) next() : 한 단어 (띄어쓰기, 엔터를 만나면 입력 종료)
+		//    nexLine() : 한 문장 (엔터를 만나면 입력 종료)
+		//    nextInt() : 다음 정수 
 		
+		// 2) 스캐너 입력 버퍼와 nextXXX의 의미
+		//    키보드 입력 -> 입력 버퍼에 저장 -> nextXXX를 통해서 버퍼 내용을 읽어옴
+		//    nextLine() : 입력버퍼-hello world(엔터) -> nextXXX()-hello world(엔터)로 읽음 -> 후처리-엔터 제거 (버퍼가 싹 비어있음)
+		//    nextInt() : 입력버퍼-100(엔터) -> nextXXX()-100 -> 버퍼 안에 (엔터)가 남아있음 (next, nextdouble, nextint 등 모두 입력 버퍼에서 -엔터-를 제외 하고 내요안 읽어옴)
+		
+		//	  키보드 입력 -> 엔터를 누르는 순간 입력된 모든 내용이 통째로 String에 저장됨(한 글자 한 글자씩 읽어오는 것 x) -> 버퍼 : 바구니에 미리 저장시켜 놓고 한 번에 들고 오는 것
+		// 	  입력 버퍼에 저장할 때 문제가 생김 : hello world(엔터) 로 저장됨 <-엔터까지 같이 저장됨
+		// 	  nextLine의 경우 hello world에서 엔터 전까지만 얻어옴
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("nextInt() : "); // 입력 버퍼 : 100(엔터)
+		int a = sc.nextInt(); // a = 100 / 입력버퍼 : (엔터)
+		
+
+		sc.nextLine(); // 문제 해결!
+		
+		System.out.print("nextLine() : "); // 입력버퍼 : a b c (엔터)
+		String s = sc.nextLine(); // s = a b c / 입력버퍼 : -아무것도 없음_
+		
+		// nextInt : 100
+		// nextLine :
+		// 종료
+		
+		// 이렇게 됨
+
+		// [문제점]
+		// nextInt() 이후 입력 문자에 남아있는 (엔터) 때문에
+		// 다음 nextLine() 수행 시, 버퍼에 남아 있는 (엔터)를 읽어버리기 때문에
+		// 추가적인 입력을 시도하지 못하고 다음 코드로 넘어가버림
+		
+		// [해결방법]
+		// 입력을 위한 nextLine() 수행 전, 입력버퍼에서 (엔터)를 제거
+		// -> 빈 공간에 sc.nextLine() 구문을 한 번 작성하면 (엔터)가 제거됨
+		
+		System.out.println("종료");
+		
+		
+		
+		
+		
+		
+		int count = 0;
+		// 1. 첫 배열 크기 지정
+		System.out.print("배열의 크기를 입력하세요 : ");
+		int size = sc.nextInt(); // 입력 버퍼에 개행문자(엔터)가 남음
+		sc.nextLine(); // 입력 버퍼에 남은 개행문자(엔터) 제거
+		
+		count += size;
+		// 2. 첫 배열 생성
 		String[] arr = new String[1000];
 		
 		for (int i=0; i<count; i++) {
@@ -495,7 +543,42 @@ i 개수 : 2
 		System.out.println(Arrays.toString(arr2));
 		
 		
-		
+		/*
+		 * while(true){
+		 * System.out.print("더 값을 입력하시겠습니까?(Y/N) : ");
+		 * char ch = sc.nextLine().charAt(0);
+		 * 
+		 * if (ch == 'N') {
+		 * break;
+		 * }
+		 * 
+		 * 5. 더 입력 받을 개수 입력
+		 * System.out.print("더 입력하고 싶은 개수 : "
+		 * int addSize = sc.nextInt();
+		 * sc.nextLine(); // 입력 버퍼 개행문자 제거
+		 * 
+		 * 6. 기존 배열보다 더 늘어난 개수만큼 큰 새 배열 생성
+		 * String newBooks[] = new String[books.length + addSize];
+		 * 
+		 * 7. 깊은 복사를 통해 기존 배열 내용을 새 배열로 복사
+		 * System.arraycopy(books, 0, newBooks, 0, books.length);
+		 * 
+		 * 8. 새 배열의 빈칸 부터 새로운 입력을 받아서 저장
+		 * for(int i=books.length; i<newBooks.length){
+		 * System.out.print((i+1) + "번째 문자열 : ");
+		 * newBooks[i] = sc.nextLine();
+		 * 
+		 * 
+		 * 9. 기존 참조배열 books에 newBooks의 주소를 얕은 복사
+		 * books = newBooks; < 사이즈가 다른데 왜 가능하지?
+		 * 
+		 * } // while 종료
+		 * 
+		 * 
+		 * 10. 배열에 저장된 모든 값 출력
+		 * System.out.println(Arrays.toString(books);
+		 * 
+		 */
 		
 	}
 	
@@ -563,14 +646,50 @@ i 개수 : 2
 	}
 	
 	
-	public void practice18() {  //* 다시 풀어보기~~
+	public void practice18() {  
 		
 		//4행 4열 2차원 배열을 생성하여 0행 0열부터 2행 2열까지는 1~10까지의 임의의 정수 값 저장 후
 		//아래의 내용처럼 처리하세요.
 		
 				
 		int[][] arr = new int[4][4];
+		int rowSum = 0;
+		int colSum = 0;
+	
+		for (int row=0; row<arr.length; row++) {
+			for(int col=0; col<arr[row].length; col++) {
+				if (row < arr.length-1 && col < arr[row].length-1) {
+					arr[row][col] = (int)(Math.random()*10+1);
+					rowSum += arr[row][col];
+				}
+				else if (row < arr.length-1 && col == arr[row].length-1) {
+					arr[row][col] = rowSum;
+					rowSum = 0;
+				}
+	
+			}
+		}
+		for (int col=0; col<arr.length; col++) {
+			for(int row=0; row<arr.length; row++) {
+				colSum += arr[row][col];
+			}
+			arr[arr.length-1][col] = colSum;
+		}
 		
+		
+		for (int row=0; row<arr.length; row++) {
+			for (int col=0; col<arr[row].length; col++) {
+				System.out.printf("%3d ", arr[row][col]);
+			}
+			System.out.println();
+		}
+		
+	
+		
+		
+		
+	}
+	
 		/*
 		for(int row=0; row<arr.length; row++) {
 			
@@ -625,7 +744,7 @@ i 개수 : 2
 	*/
 	
 	
-	public void practice19() { // 풀어야함
+	public void practice19() { 
 		
 		/*
 		 * 2차원 배열의 행과 열의 크기를 사용자에게 직접 입력받되, 1~10사이 숫자가 아니면
@@ -634,18 +753,42 @@ i 개수 : 2
 		 * (char형은 숫자를 더해서 문자를 표현할 수 있고 65는 A를 나타냄, 알파벳은 총 26글자)
 		 */
 
-
+		int rowNum;
+		int colNum;
+		
+		do {
 			
 		Scanner sc = new Scanner(System.in);
 		System.out.print("행 크기 : ");
-		int rowNum = sc.nextInt();
+		rowNum = sc.nextInt();
 		
 		System.out.print("열 크기 : ");
-		int colNum = sc.nextInt();
+		colNum = sc.nextInt();
 		
 		boolean rowrange = rowNum < 1 || rowNum > 10;
 		boolean colrange = colNum < 1 || colNum > 10;
-
+		
+		
+		if (rowrange || colrange) {
+			System.out.println("반드시 1~10 사이의 정수를 입력해야 합니다.");
+		}
+		else {
+			break;
+		}
+		} while (true);
+		
+		
+		char[][] arr = new char[rowNum][colNum];
+		
+		for (int row=0; row<arr.length; row++) {
+			for (int col=0; col<arr[row].length; col++) {
+				arr[row][col] = (char)(Math.random()*26+65);
+				System.out.print(arr[row][col] + " ");
+			}
+			System.out.println();
+		}
+		
+		
 		
 		
 	}
@@ -684,7 +827,7 @@ i 개수 : 2
 	}
 	
 	
-	public void practice21() {  //** 다시 풀기
+	public void practice21() {  //  while 문 무한루프 해결, 출력해야함
 		
 		/*
 		 * 1차원 문자열 배열에 학생 이름 초기화되어 있다.
@@ -697,24 +840,101 @@ i 개수 : 2
 				"송성실", "윤예의", "진재주", "차천축", "피풍표", "홍하하"};
 		
 		String[][] arr = new String[3][2];
+		String[][] arr2 = new String[3][2];
 		int count = 0;
+		int num = 1;
 		
+		while(count != students.length)
+		{
+		System.out.printf("===%d분단===\n", num);
 		for(int row=0; row<arr.length; row++) {
 			for(int col=0; col<arr[row].length; col++) {
-				arr[row][col] = students[count];
-				count++;
-				System.out.println(arr[row][col]);
-			}
+				if (arr[row][col] == null) {
+					arr[row][col] = students[count];
+					System.out.print(arr[row][col] + " ");
+					count++;
+					
+				}
+				else {
+					arr2[row][col] = students[count];
+					System.out.print(arr2[row][col] + " ");
+					count++;
+					}
+				}
 			System.out.println();
-		}
-		
-		
+				}
+			num++;
+			System.out.println();
+			}
 		
 	}
 	
 	
 	
-	public void practice22() {
+	public void practice22() { // 풀어야함
+		
+		
+		/*
+		 * 위 문제에서 자리 배치한 것을 가지고 학생 이름을 검색하여
+해당 학생이 어느 자리에 앉았는지 출력하세요.
+[실행 화면]
+== 1분단 ==
+강건강
+남나나
+도대담
+류라라
+문미미
+박보배
+== 2분단 ==
+송성실
+윤예의
+진재주
+차천축
+피풍표
+홍하하
+============================
+검색할 학생 이름을 입력하세요 : 차천축
+검색하신 차천축 학생은 2분단 2번째 줄 오른쪽에 있습니다.
+		 */
+		Scanner sc = new Scanner(System.in);
+		
+		String[] students = {"강건강", "남나나", "도대담", "류라라", "문미미", "박보배",
+				"송성실", "윤예의", "진재주", "차천축", "피풍표", "홍하하"};
+		
+		String[][] arr = new String[3][2];
+		String[][] arr2 = new String[3][2];
+		int count = 0;
+		int num = 1;
+		
+		while(count != students.length)
+		{
+		System.out.printf("===%d분단===\n", num);
+		for(int row=0; row<arr.length; row++) {
+			for(int col=0; col<arr[row].length; col++) {
+				if (arr[row][col] == null) {
+					arr[row][col] = students[count];
+					System.out.print(arr[row][col] + " ");
+					count++;
+					
+				}
+				else {
+					arr2[row][col] = students[count];
+					System.out.print(arr2[row][col] + " ");
+					count++;
+					}
+				}
+			System.out.println();
+				}
+			num++;
+			System.out.println();
+			}
+		
+		System.out.println("==================================");
+		System.out.print("검색할 학생 이름을 입력하세요 : ");
+		String input = sc.next();
+		
+		
+		
 		
 		
 	}
@@ -722,6 +942,36 @@ i 개수 : 2
 	
 	public void practice23() {
 		
+		/*
+		 * String 2차원 배열 6행 6열을 만들고 행의 맨 위와 제일 앞 열은 각 인덱스를 저장하세요.
+		 * 그리고 사용자에게 행과 열을 입력 받아 해당 좌표의 값을 “X”로 변환해 2차원 배열을 출력하세요.
+		 */
+		Scanner sc = new Scanner(System.in);
+		String arr[][] = new String[6][6];
+		
+		//do {
+		
+		System.out.print("행 인덱스 입력 : ");
+		int rowInput = sc.nextInt();
+		
+		System.out.print("열 인덱스 입력 : ");
+		int colInput = sc.nextInt();
+		
+		boolean rightrinput = rowInput > 6 || rowInput < 0;
+		boolean rightcinput = colInput > 6 || colInput < 0;
+		
+	//	} while(rightcinput || rightrinput);
+		
+		for(int row=0; row<arr.length; row++) {
+			for(int col=0; col<arr.length; col++) {
+				if(row == rowInput-1 && col == colInput-1)
+					System.out.print("x" + " ");
+				else {
+					System.out.print("_" + " ");
+				}
+			}
+			System.out.println();
+		}
 		
 		
 		
