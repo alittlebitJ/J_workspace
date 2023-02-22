@@ -2,6 +2,7 @@ package edu.kh.array.practice;
 
 import java.awt.print.Printable;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 public class ArrayPractice {
@@ -682,67 +683,44 @@ i 개수 : 2
 				System.out.printf("%3d ", arr[row][col]);
 			}
 			System.out.println();
+		
 		}
-		
-	
-		
-		
-		
 	}
-	
-		/*
-		for(int row=0; row<arr.length; row++) {
-			
-			for(int col=0; col<arr[row].length; col++) {
-				
-				if (row < arr.length-1 && col < arr[row].length-1) {
-					arr[row][col] = (int)(Math.random()*10+1);
-					System.out.printf("%3d ", arr[row][col]);
-					rowSum += arr[row][col];
-				}
-				else if(col == arr.length-1) {
-					arr[row][col] = rowSum;					
-					System.out.printf("%3d ", arr[row][col]);
-					rowSum = 0;
-				}
-				
-			}
-			System.out.println();
-		}
-		}
 		
-		for (int row1=0; row1<arr.length; row1++) {
-			for(int col=0; col<arr.length; col++) {
-				
-				arr[row1][arr.length-1] += arr[row1][col];
-				arr[arr.length-1][col] += arr[row1][col];
-				arr[arr.length-1][arr.length-1] += arr[row1][col];
-				
-			}
-		}
-		
-		
-		for (int row1=0; row1<arr.length; row1++) {
-			for (int col=0; col<arr.length; col++) {
-				System.out.print(arr[row1][col] + "\t");
-			}
-			System.out.println();
-		}
-		
-		
-		
-		
-	
 
+	// 18번 선생님 풀이
+	public void practice18t() {
+	
+		// 1. 4행 4열 2차원 배열 생성
+		int[][] arr = new int[4][4];
+		final int LAST_ROW_INDEX = arr.length-1; // 행 마지막 인덱스
+		final int LAST_COL_INDEX = arr[0].length-1; // 열 마지막 인덱스
+		
+		// 2. 0행0열 ~ 2행2열까지 1~10 사이 난수 대입
+		Random random = new Random();
+		// random.netInt(); 0이상 1미만 정수
+		
+		for(int row=0; row<LAST_ROW_INDEX; row++) {
+			for(int col=0; col<LAST_COL_INDEX; col++) {
+				arr[row][col] = random.nextInt(10)+1;
+				arr[LAST_ROW_INDEX][LAST_COL_INDEX] += arr[row][col]; // 3행 3열에 발생된 난수 모두 누적
+				
+				// 난수 대입과 동시에 해당 행/열의 끝에 누적
+				arr[row][LAST_COL_INDEX] += arr[row][col]; // 각 행 마지막 열에 누적
+				arr[LAST_ROW_INDEX][col] += arr[row][col]; // 각 열 마지막 행에 누적
+			}
+		}
 	
 		
+		// 출력용 2중 for문
+		for (int row = 0; row <= LAST_ROW_INDEX; row++) {
+			for (int col = 0; col <= LAST_COL_INDEX; col++) {
+				System.out.printf("%3d", arr[row][col]);
+			}
+			System.out.println();
+		}
+
 	}
-		
-	
-	
-	
-	*/
-	
 	
 	public void practice19() { 
 		
@@ -871,7 +849,7 @@ i 개수 : 2
 	
 	
 	
-	public void practice22() { // 풀어야함
+	public void practice22() {
 		
 		
 		/*
