@@ -950,7 +950,6 @@ i 개수 : 2
 		Scanner sc = new Scanner(System.in);
 		String arr[][] = new String[6][6];
 		
-		//do {
 		
 		System.out.print("행 인덱스 입력 : ");
 		int rowInput = sc.nextInt();
@@ -958,10 +957,7 @@ i 개수 : 2
 		System.out.print("열 인덱스 입력 : ");
 		int colInput = sc.nextInt();
 		
-		boolean rightrinput = rowInput > 6 || rowInput < 0;
-		boolean rightcinput = colInput > 6 || colInput < 0;
-		
-	//	} while(rightcinput || rightrinput);
+
 		
 		for(int row=0; row<arr.length; row++) {
 			for(int col=0; col<arr.length; col++) {
@@ -978,8 +974,42 @@ i 개수 : 2
 		
 	}
 	
-	public void practice24() {
+	public void practice24() { //do while문 다시 해보기
 		
+		
+		
+		Scanner sc = new Scanner(System.in);
+		String arr[][] = new String[6][6];
+		
+		int rowInput;
+		
+		
+		do {
+		
+		System.out.print("행 인덱스 입력 : ");
+		rowInput = sc.nextInt();
+		
+		System.out.print("열 인덱스 입력 : ");
+		int colInput = sc.nextInt();
+		
+		
+		for(int row=0; row<arr.length; row++) {
+			for(int col=0; col<arr.length; col++) {
+				if(row == rowInput && col == colInput) {
+					arr[row][col] = "x";
+					System.out.print(arr[row][col] + " ");
+			}
+				else {
+					arr[row][col] = "_";
+					System.out.print(arr[row][col] + " ");
+				}
+			}
+			System.out.println();
+		}
+		
+		} while(rowInput != 99);
+		
+		System.out.println("프로그램 종료");
 		
 		
 		
