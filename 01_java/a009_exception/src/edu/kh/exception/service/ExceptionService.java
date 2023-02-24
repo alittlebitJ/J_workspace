@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import edu.kh.exception.user.exception.ScoreInputException;
+
 public class ExceptionService {
 
 	
@@ -100,8 +102,10 @@ public class ExceptionService {
 //		} catch(Exception e) { // 산술적 예외
 //			System.out.println("0으로 나눌 수 없습니다.");
 			// 이러면 Unreachable catch block for ArithmeticException. It is already handled by the catch block for Exception 에러 메세지
+			// 모든 예외를 위에서 다 처리하기 때문에 아래 catch문으로 절대로 도달하지 않음. 비효율적인 코드가 됨.
+			
 			// 해결방법 : 상위 타입 catch를 뒤쪽에 배치해서 하위 타입 catch에 대한 검사가 먼저 진행되게 한다
-			// 			굳이 상위 타입 catch를 쓸건데 하위 타입 catch를 앞에 쓰는 이유? 
+			// 굳이 상위 타입 catch를 쓸건데 하위 타입 catch를 앞에 쓰는 이유? 
 			// 어떤 에러인지 구분하기 위해 하위 타입 catch를 먼저 처리해주고, 뭔지 모르겠는데 예외가 발생할 경우를 대비해 마지막에 상위 타입 catch를 써주는 편
 
 		} catch(ArithmeticException e) { // 산술적 예외
@@ -124,6 +128,85 @@ public class ExceptionService {
 			// ** 예외가 발생 하든 말든 무조건 실행 **
 			System.out.println("프로그램 종료");
 		}
+		
+	}
+	
+	
+	
+	public void ex4() {
+		
+		// throw : 예외 강제 발생
+		// 			ex) throw new IOException	
+		// throws : 해당 메서드에서 발생한 예외를 호출한 메서드로 던져버리는 예외 처리 방법
+
+		System.out.println("ex4() 실행");
+		try {
+			methodA();
+		} catch(IOException e) {
+			//e.getMessage() 어떤것 때문에 예외가 던져졌는지 알 수 있음
+			e.printStackTrace();
+			// 예외가 발생한 지점까지의 stack 메모리를 추적하여 출력
+			System.out.println("catch문 처리");
+		}
+		
+		
+	}
+	
+	public void methodA() throws IOException{
+		System.out.println("methodA() 실행");
+		methodB();
+	}
+	
+	public void methodB() throws IOException {
+		System.out.println("methodB() 실행");
+		methodC();
+		// methodC는 IOException을 던질수도 있기 때문에(public void methodC() 'Throws IOException') 호출 시 예외 처리 구문을 작성해야 한다.
+	}
+	
+	public void methodC() throws IOException {
+		System.out.println("methodC() 실행");
+
+		throw new IOException();
+	}
+	
+	
+	
+	public void ex5() throws ScoreInputException {
+		// 사용자 정의 예외 : Java에서 제공하지 않는 예외 상황이 있을 경우, 이를 처리하기 위한 예외 클래스를 사용자가 직접 작성
+		
+		Scanner sc = new Scanner(System.in);
+		
+		
+		System.out.print("정수 입력(0~100) : ");
+		int score = sc.nextInt();
+		
+		if(score < 0 || score > 100) {
+			// 사용자 정의 예외 강제 발생, 에러 발생시 여기서 코드가 끝남. 아래 코드 진행 안 함(return이랑 비슷)
+			// throw new ScoreInputException(); 기본 생성자
+			throw new ScoreInputException("ex5() 0~100 사이 범위 초과"); // 어느 위치에서 어느 에러가 났는지 확인하기 편하게 이렇게 적어놓는 경우가 많음
+		}
+		
+		System.out.println("입력한 정수는 : " + score);
+		
+		
+		// 입력한 숫자가 0~100이 아닐때를 예외처리(보통 if문으로 만들지만, 예외로 처리해봄)
+		
+	}
+	
+	public void startEx5() {
+		
+		try {
+			ex5(); // ScoreInputException이 던져질 가능성이 있음
+		} catch(ScoreInputException e) {
+			// e.printStackTrace(); 스택 트레이스를 보고 싶을 때
+			System.out.println("예외 내용 : " + e.getMessage());
+			System.out.println("예외처리 진행");
+		} finally {
+			System.out.println("프로그램 종료");
+		}
+		
+		
+		
 		
 	}
 	
