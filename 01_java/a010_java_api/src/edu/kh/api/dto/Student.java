@@ -97,6 +97,29 @@ public class Student {
 		return true; // 모든 필드가 같을 경우
 	}
 	
+	// Object.hashCode();
+	// -두 객체의 필드 ㄱ값이 같다면 hashCode()도 똑같은 정수 값을 반환해야 한다.
+	// -hash 함수 : 입력 받은 문자열/숫자를 특정한 길이의 문자열/숫자로 변환
+	// -> 최대한 중복되지 않는 숫자를 만들어 냄
+	// -hashCode() : 객체의 필득 ㅏㅄ을 이용해서 일정한 길이의 숫자를 만드는 함수
+	// 왜 필요한가? Java 실행 시 내부에서 객체 검색하는 속도를 증가
+	// 어떻게 작성하는가?
+	// 필드 값이 같으면 항상 같은 수가 나올 수 있도록 구현 + equals() 오버라이딩 시 필수적으로 같이 오버라이징
+	
+	@Override
+	public int hashCode() {
+		int result = 1; // 곱할때 아무 영향 없는 1로 초기화
+		final int PRIME = 31; // 소수 (곱연산 시 속도가 빠름)
+		
+		result = result * PRIME + grade;
+		result = result * PRIME + classRoom;
+		result = result * PRIME + number;
+		result = result * PRIME 
+				+ (name == null ? 0 : name.hashCode()); 
+		//name은 string이라 null이 될 수도 있음. null이면 null point error
+		
+		return result;
+	}
 	
 	
 
