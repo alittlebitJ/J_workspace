@@ -1,0 +1,76 @@
+-- SELECT, 단일행 함수 연습문제
+-- 1. **내림 처리-절대값 처리를 하면 결과값이 달라져 TRUNC로 버림 처리 함. 다시 볼 것
+SELECT EMP_NAME , FLOOR(ABS(HIRE_DATE - SYSDATE)) 근무일수1 , FLOOR(SYSDATE - HIRE_DATE) 근무일수2
+FROM EMPLOYEE ;
+
+
+-- 2.
+SELECT EMP_ID , EMP_NAME , EMAIL , PHONE 
+FROM EMPLOYEE 
+WHERE MOD (EMP_ID, 2) != 0;
+-- WHERE SUBSTR(EMP_ID, -1, 1) IN (1,3,5,7,9);
+
+-- 3. 
+SELECT *
+FROM EMPLOYEE 
+WHERE MONTHS_BETWEEN(SYSDATE, HIRE_DATE) /12 >= 20 ;
+-- WHERE EXTRACT (YEAR FROM SYSDATE) - EXTRACT(YEAR FROM HIRE_DATE) >= 20;
+
+-- 4.
+SELECT EMP_NAME , SUBSTR(EMP_NO, 1, 8) || '********' 주민등록번호
+-- SELECT EMP_NAME, REPLACE (EMP_NO, SUBSTR(EMP_NO, 9), '******')
+-- RPAD(SUBSTR(EMP_NO), 1, 8), 14, '*') 주민등록번호
+-- RPAD : 14칸의 공간을 만들고 왼쪽부터 채운 후 빈 칸은 원하는 문자로 채우기
+-- LPAD : 오른쪽부터 채운 후 왼쪽 공간은 원하는 문자로 채우기
+FROM EMPLOYEE ;
+
+-- 5. 
+SELECT EMP_NAME , JOB_CODE , TO_CHAR((SALARY + (SALARY * NVL(BONUS, 0) ))* 12, 'L999,999,999')  "연봉(원)"
+FROM EMPLOYEE ;
+
+
+-- 6.
+SELECT EMP_ID  , EMP_NAME, DEPT_CODE , HIRE_DATE  
+FROM EMPLOYEE 
+WHERE DEPT_CODE IN ('D5', 'D9') AND EXTRACT(YEAR FROM HIRE_DATE) = 2004;
+-- SELECT TO_CHAR(HIRE_DATE, 'YYYY') 
+-- WHERE TO_CHAR(HIRE_DATE,'YYYY') = '2004';
+
+-- 7.
+SELECT EMP_NAME , HIRE_DATE, EXTRACT(DAY FROM LAST_DAY(HIRE_DATE))-EXTRACT(DAY FROM HIRE_DATE) + 1 "입사한 달의 근무 일수"
+-- LAST_DAY(HIRE_DATE) - HIRE_DATE + 1 "입사한 달의 근무 일수"
+FROM EMPLOYEE ;
+
+
+-- 8
+SELECT EMP_NAME , DEPT_CODE ,
+TO_CHAR(TO_DATE(SUBSTR(EMP_NO, 1, 6)), 'YY"년" MM"월" DD"일"') 생년월일,
+-- SUBSTR(EMP_NO), 1, 2) || '년' || SUBSTR(EMP_NO), 3, 2) || '월' || SUBSTR(EMP_NO), 5, 2) || '일' || 생년월일, 
+FLOOR(MONTHS_BETWEEN(SYSDATE, TO_DATE(SUBSTR(EMP_NO, 1, 6))) / 12) "만 나이" 
+FROM EMPLOYEE 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
