@@ -21,11 +21,9 @@ public class Employee {
 	 private int managerId; // 사수번호
 	 
 	 
+
 	 
-	 public Employee() {} // 기본 생성자
-	 
-	 
-	 
+	 public Employee() {}
 	 
 	 
 	public Employee(int empId, String empName, String phone, String departmentTitle, String jobName) {
@@ -49,6 +47,23 @@ public class Employee {
 		this.jobName = jobName;
 		this.salary = salary;
 	}
+	
+	
+	public Employee(String empName, String empNo, String email, String phone, String deptCode,
+			String jobCode, String salLevel, int salary, double bonus, int managerId) {
+		super();
+		this.empName = empName;
+		this.empNo = empNo;
+		this.email = email;
+		this.phone = phone;
+		this.salary = salary;
+		this.deptCode = deptCode;
+		this.jobCode = jobCode;
+		this.salLevel = salLevel;
+		this.bonus = bonus;
+		this.managerId = managerId;
+	}
+
 
 
 

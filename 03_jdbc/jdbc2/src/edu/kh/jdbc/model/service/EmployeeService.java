@@ -19,6 +19,10 @@ import edu.kh.jdbc.model.dto.Employee;
 // Service : 비즈니스 로직
 // 요청에 따른 필요 데이터를 반환
 // 트랜잭션 제어 처리(Commit, Rollback)
+/**
+ * @author user1
+ *
+ */
 public class EmployeeService {
 	
 	// dao에 여러 SQL을 수행하기 위한 메서드를 각각 작성하여 호출
@@ -91,6 +95,12 @@ public class EmployeeService {
 	}
 
 
+	/** 급여 범위 내 사원 정보를 조회하는 서비스
+	 * @param input1
+	 * @param input2
+	 * @return empList
+	 * @throws SQLException
+	 */
 	public List<Employee> selectSalary(int input1, int input2) throws SQLException {
 		// 1. Connection 연결
 		Connection conn = getConnection();
@@ -103,6 +113,76 @@ public class EmployeeService {
 		
 		// 4. 결과 반환
 		return empList;
+	}
+
+
+	/** 사원 정보 삽입 서비스
+	 * @param emp
+	 * @return result
+	 * @throws SQLException
+	 */
+	public int insertmEmployee(Employee emp) throws SQLException {
+		// 1. 커넥션 생성
+		Connection conn = getConnection();
+		
+		// 2. dao 메서드 호출 후 결과 반환받기
+		int result = dao.insertEmployee(conn, emp);
+		
+		// DAO 에서 DML(INSERT) 수행
+		// -> 트랜잭션에 임시 저장 되어 있는 상태
+		// -> 수행 결과에 따라 commit, rollback 지정
+		
+		// 3. 트랜잭션 제어 처리
+		if(result > 0) commit(conn);// 삽입 성공 시
+		else rollback(conn); // 삽입 실패 시 
+		
+		// 4. 커넥션 반환
+		close(conn);
+		
+		// 5. 결과 반환
+		return result;
+	}
+
+
+	/** 회원 정보 수정 서비스
+	 * @param emp
+	 * @return result
+	 */
+	public int updateEmployee(Employee emp) throws SQLException {
+		// 1. connection 생성
+		Connection conn = getConnection();
+		
+		// 2. DAP 메서드 호출 후 결과 반환 받기
+		int result = dao.updateEmployee(conn, emp);
+		
+		// 3. 트랜잭션 제어 처리
+		if(result>0) 	commit(conn);
+		else 			rollback(conn);
+		
+		// 4. connection 반환
+		close(conn);
+		
+		// 5. 결과 반환
+		return result;
+	}
+
+
+	/** 사원 퇴사 처리 서비스
+	 * @param input
+	 * @return result
+	 * @throws SQLException
+	 */
+	public int retireEmployee(int input) throws SQLException {
+		Connection conn = getConnection(); // 1. 커텍션 생성
+		
+		int result = dao.retireEmployee(conn, input); // 2. DAO 메서드 호출 후 결과 반환 받음
+		
+		if (result>0) 	commit(conn); // 3. 트랜잭션 제어 처리
+		else 			rollback(conn);
+		
+		close(conn); // 4. 커넥션 반환
+		
+		return result; // 5. 결과 반환
 	}
 	
 	
