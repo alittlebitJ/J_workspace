@@ -6,6 +6,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 import edu.kh.jdbc.model.dto.Emp;
 import edu.kh.jdbc.model.service.EmpService;
@@ -132,6 +133,9 @@ public class EmpView {
 	/**
 	 * 1. 재직중인 사원 전체 조회
 	 */
+	/**
+	 * 
+	 */
 	private void selectEmp() {
 		System.out.println("***** 재직중인 사원 전체 조회 *****");
 		
@@ -141,20 +145,19 @@ public class EmpView {
 			if (empList.isEmpty()) {
 				System.out.println("사원이 존재하지 않습니다.");
 				return;
-			} else {
-				for (Emp emp : empList) {
+			}
+			for (Emp emp : empList) {
 					
-					int empId = emp.getEmpId();
-					String empName = emp.getEmpName();
-					String deptTitle = emp.getDepartmentTitle();
-					String jobName = emp.getJobName();
-					int salary = emp.getSalary();
-					String phone = emp.getPhone();
-					String email = emp.getEmail();
-					
-					System.out.printf("%d / %s / %s / %s / %d / %s / %s\n",
-							empId, empName, deptTitle, jobName, salary, phone, email);
-				}
+				int empId = emp.getEmpId();
+				String empName = emp.getEmpName();
+				String deptTitle = emp.getDepartmentTitle();
+				String jobName = emp.getJobName();
+				int salary = emp.getSalary();
+				String phone = emp.getPhone();
+				String email = emp.getEmail();
+				
+				System.out.printf("%d / %s / %s / %s / %d / %s / %s\n",
+						empId, empName, deptTitle, jobName, salary, phone, email);
 			}
 		} catch (SQLException e) {
 			System.out.println("재직중인 사원 전체 조회 중 오류가 발생했습니다.");
@@ -162,33 +165,31 @@ public class EmpView {
 		}
 	}
 	
-
 	
 	/**
 	 * 2. 퇴직한 사원 전체 조회
 	 */
 	private void selectEmpEnt() {
 		System.out.println("*****  퇴직한 사원 전체 조회 *****");
-		
 		try {
 			List<Emp> empList = service.selectEmpEnt();
 			
 			if (empList.isEmpty()) {
 				System.out.println("퇴직한 사원이 존재하지 않습니다.");
-				return;
-			} else {
-				for (Emp emp : empList) {
+				return; }
+			
+			for (Emp emp : empList) {
 					
-					int empId = emp.getEmpId();
-					String empName = emp.getEmpName();
-					String phone = emp.getPhone();
-					String email = emp.getEmail();
-					String entDate = emp.getEntDate();
-					
-					System.out.printf("%d / %s / %s / %s / %s\n",
-							empId, empName, phone, email, entDate);
+				int empId = emp.getEmpId();
+				String empName = emp.getEmpName();
+				String phone = emp.getPhone();
+				String email = emp.getEmail();
+				String entDate = emp.getEntDate();
+				
+				System.out.printf("%d / %s / %s / %s / %s\n",
+						empId, empName, phone, email, entDate);
 				}
-			}
+			
 		} catch (SQLException e) {
 			System.out.println("퇴직한 사원 전체 조회 중 오류가 발생했습니다.");
 			e.printStackTrace();
@@ -215,10 +216,17 @@ public class EmpView {
 				return;
 			}
 			System.out.printf("%d / %s / %s / %s / %d / %s / %s / %s / %s \n",
-					result.getEmpId(), result.getEmpName(), result.getDepartmentTitle(),
-					result.getJobName(), result.getSalary(), result.getPhone(),
-					result.getEmail(), result.getHireDate(), result.getEntYN());
-		
+					
+					result.getEmpId(), 
+					result.getEmpName(), 
+					result.getDepartmentTitle(),
+					result.getJobName(), 
+					result.getSalary(), 
+					result.getPhone(),
+					result.getEmail(), 
+					result.getHireDate(), 
+					result.getEntYN());
+			
 		} catch (SQLException e) {
 			System.out.println("사번이 일치하는 사원 조회 중 오류가 발생했습니다.");
 			e.printStackTrace();
@@ -299,22 +307,34 @@ public class EmpView {
 		System.out.print("수정할 사원 번호 : ");
 		String empId = sc.nextLine();
 		
-		System.out.print("수정할 이메일 : ");
-		String email = sc.nextLine();
-		
-		System.out.print("수정할 전화번호 : ");
-		String phone = sc.nextLine();
-		
-		System.out.print("수정할 급여 : ");
-		int salary = sc.nextInt();
-		sc.nextLine();
-		
-		System.out.print("수정할 보너스 : ");
-		double bonus = sc.nextDouble();
-		sc.nextLine();
-		
-		
+				
 		try {
+			
+			Emp emp = service.selectEmpId(Integer.parseInt(empId));
+			// 수정될 정보를 입력 받기 전, 해당 사번을 가진 사원이 존재하는지 확인
+			// -> 3번 사번으로 사원 조회 서비스를 이용해서 확인
+			
+			if(emp == null) { 
+				System.out.println("사번이 일치하는 사원이 없습니다.");
+				return;
+			}
+			
+			// 입력 받은 사번의 사원이 존재할 때 수정 할 정보 입력
+			System.out.print("수정할 이메일 : ");
+			String email = sc.nextLine();
+			
+			System.out.print("수정할 전화번호 : ");
+			String phone = sc.nextLine();
+			
+			System.out.print("수정할 급여 : ");
+			int salary = sc.nextInt();
+			sc.nextLine();
+			
+			System.out.print("수정할 보너스 : ");
+			double bonus = sc.nextDouble();
+			sc.nextLine();
+			
+			// 입력 받은 정보를 객체에 담아서 서비스 전달 (emp 객체를 선언 해 emp에 set으로 변수를 넣어 emp를 서비스로 넘겨도 됨)
 			int result = service.updateEmp(empId, email, phone, salary, bonus);
 			
 			String src = "";
@@ -339,6 +359,7 @@ public class EmpView {
 		
 		System.out.print("삭제할 사원 번호 : ");
 		String input = sc.nextLine();
+		
 		
 		System.out.println("정말 삭제하시겠습니까? (Y/N) : ");
 		char check = sc.nextLine().toUpperCase().charAt(0);
@@ -377,23 +398,42 @@ public class EmpView {
 		System.out.print("퇴직 처리 할 사원 번호 : ");
 		String input = sc.nextLine();
 		
-		System.out.println("정말 퇴직 처리 하시겠습니까? (Y/N) : ");
-		char check = sc.nextLine().toUpperCase().charAt(0);
-		if(check == 'N') {
-			System.out.println("처음으로 돌아갑니다.");
-			return;
-		}
-		if(check != 'Y') {
-			System.out.println("Y 또는 N 을 입력해 주세요"); 
-			return;
-		}
 		
 		try {
-			int result = service.updateEmpEnt(input);
-			String src = "";
-			if (result>0) 	src = "퇴직 처리 성공!";
-			else 			src = "사번이 일치하지 않거나, 이미 퇴직된 사원입니다";
-			System.out.println(src);
+			// 1. 사번이 일치하는 사원이 있는지 + 있어도 퇴직한 사원인지 확인하는 서비스 호출
+			int check = service.checkEmployee(input);
+
+			if(check == 0) {
+				System.out.println("[사번이 일치하는 사원이 존재하지 않습니다.]");
+				return;
+			}
+			if(check == 1) {
+				System.out.println("[이미 퇴직 처리된 사원입니다.]");
+				return;
+			}
+			
+			
+			// 2. 사원이 존재하고 퇴직하지 않았으면, 정말 퇴직처리 할 것인지 확인 후 서비스 호출
+			System.out.println("정말 퇴직 처리 하시겠습니까? (Y/N) : ");
+			
+			char ch = sc.nextLine().toUpperCase().charAt(0);
+			
+			if(ch == 'N') {
+				System.out.println("[취소되었습니다.]");
+				return;
+			}
+			if(ch != 'Y') {
+				System.out.println("[Y 또는 N 을 입력해 주세요]"); 
+				return;
+			}
+			
+			service.updateEmpEnt(input);
+			// int result = service.updateEmpEnt(input);
+			// 앞서서 사번에 대한 검증이 끝난 상황. 사번이 없어서 수정이 실패하는 경우는 생각 할 필요 없음
+			// --> 퇴직 서비스는 성공 또는 예외만 존재
+			// --> 반환 값이 따로 필요 없음
+			System.out.println("퇴사 처리 성공!");
+			
 		} catch (SQLException e) {
 			System.out.println("사번으로 사원 정보 삭제 중 오류가 발생했습니다.");
 			e.printStackTrace();
@@ -431,25 +471,65 @@ public class EmpView {
 	}
 		
 	
+	/**
+	 * 9. 부서별 통계 조회
+	 */
 	private void deptStatistic() {
 		
 		try {
 			
-			Map<String, Object> empMap = service.deptStatistic();
-	
-			for (Emp emp : empMap) {
-					
-					int empId = emp.getEmpId();
-					String empName = emp.getEmpName();
-					String deptTitle = emp.getDepartmentTitle();
-					Date hireDate = emp.getHireDate();
-					
-					System.out.printf("%d / %s / %s / %s \n",
-							empId, empName, deptTitle, hireDate.toString());
+			List<Map> empList = service.deptStatistic();
+			// DTO가 없을 때 Map을 사용하는 이유
+			// 1. DTO를 작성하는게 코드낭비인 경우
+			// 2. DTO와 Map의 구조가 유사하기 때문에
+			//	  tip. DTO의 필드를 Map의 Key라고 생각
+//			
+//			Emp emp = new Emp();
+//			emp.setEmpId(200);
+//			emp.setEmpName("고길동");
+//			emp.getEmpId();
+//			emp.getEmpName();
+//			
+//			
+//			Map<String, Object> map = new HashMap<>();
+//			map.put("empId", 200);
+//			map.put("empName", "고길동");
+//			map.get("empId");
+//			map.get("empName");
+//			
+			
+			// List에서 요소를 하나씩 순차 접근
+			for(Map emp : empList) {
+//				// 내가 한 풀이
+//				String deptTitle = "";
+//				int count = 0;
+//				double avg = 0.0;
+//				
+//				deptTitle = (String)emp.get(0);
+//				count = (int) emp.get(1);
+//				avg = (double) emp.get(2);
+//				
+//				System.out.printf("%s / %d / %f.1 \n", deptTitle, count, avg);
+				
+				// 선생님 풀이 1
+//				System.out.printf("%s / %d / %s \n", 
+//						emp.get(0),
+//						emp.get(1),
+//						emp.get(2));
+//				
+				
+				// 선생님 풀이 2
+				Set<Integer> set = emp.keySet(); // 0, 1, 2순서
+				for(Integer key : set) {
+					System.out.print(emp.get(key) + " / ");
 				}
+				System.out.println(); // 개행
+				
+				
+			}
 			
 		} catch (SQLException e) {
-			System.out.println("가장 최근 입사한 사원 5명 조회 중 오류가 발생했습니다.");
+			System.out.println("[부서별 통계 조회 중 예외 발생]");
 			e.printStackTrace();
 		}
 		

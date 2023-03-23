@@ -33,7 +33,9 @@ public class EmpDAO {
 		
 		try {
 			// Statement 구문 입력
-			String sql = "SELECT EMP_ID , EMP_NAME , DEPT_TITLE, JOB_NAME, SALARY , PHONE , EMAIL \r\n"
+			String sql = "SELECT EMP_ID , EMP_NAME , "
+					+ "NVL(DEPT_TITLE, '없음') DEPT_TITLE, JOB_NAME, SALARY , "
+					+ "NVL(PHONE, '없음') PHONE , EMAIL \r\n"
 					+ "FROM EMPLOYEE \r\n"
 					+ "NATURAL JOIN JOB \r\n"
 					+ "LEFT JOIN DEPARTMENT ON (DEPT_CODE = DEPT_ID)\r\n"
@@ -78,7 +80,8 @@ public class EmpDAO {
 		
 		try {
 			// Statement 구문 입력
-			String sql = "SELECT EMP_ID , EMP_NAME , PHONE , EMAIL , ENT_DATE \r\n"
+			String sql = "SELECT EMP_ID , EMP_NAME , NVL(PHONE, '-') PHONE , "
+					+ "EMAIL , TO_CHAR(ENT_DATE, 'YYYY\"년\" MM\"월\" DD\"일\"') ENT_DATE\r\n"
 					+ "FROM EMPLOYEE \r\n"
 					+ "WHERE ENT_YN = 'Y'\r\n"
 					+ "ORDER BY ENT_DATE ";
@@ -93,7 +96,7 @@ public class EmpDAO {
 				String empName = rs.getString(2);
 				String phone = rs.getString(3);
 				String email = rs.getString(4);
-				String entDate = rs.getString(5);
+				String entDate = rs.getString(5); // TO_CHAR로 형변환 해서 조회
 				
 				Emp emp = new Emp();
 					emp.setEmpId(empId);
@@ -115,7 +118,7 @@ public class EmpDAO {
 	}
 
 
-	/**3. 사번이 일치하는 사원 조회
+	/**3. 사번이 일치하는 사원 조회 SQL 수행 후 결과 반환
 	 * @param input
 	 * @return reuslt
 	 */
@@ -129,12 +132,13 @@ public class EmpDAO {
 					+ "NATURAL JOIN JOB \r\n"
 					+ "LEFT JOIN DEPARTMENT ON (DEPT_CODE = DEPT_ID)\r\n"
 					+ "WHERE EMP_ID = ?";
+					// placeholder 존제 -> PreparedStatement 사용
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, input);
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) {
+			if(rs.next()) { // 조회 결과가 있어도 1행 밖에 없음 ->if문 사용
 				
 				int empId = rs.getInt(1);
 				String empName = rs.getString(2);
@@ -156,6 +160,21 @@ public class EmpDAO {
 	}
 
 
+	/**4. 사원 정보 추가(INSERT)
+	 * @param conn
+	 * @param name
+	 * @param no
+	 * @param email
+	 * @param phone
+	 * @param deptcode
+	 * @param jobcode
+	 * @param sallevel
+	 * @param salary
+	 * @param bonus
+	 * @param managerid
+	 * @return result
+	 * @throws SQLException
+	 */
 	public int insertEmp(Connection conn, String name, String no, String email, String phone, String deptcode,
 			String jobcode, String sallevel, int salary, double bonus, String managerid) 
 	throws SQLException {
@@ -190,11 +209,22 @@ public class EmpDAO {
 	}
 
 
+	/** 5. 사번으로 사원 정보 수정(UPDATE) SQL 수행 후 결과 반환
+	 * @param conn
+	 * @param empId
+	 * @param email
+	 * @param phone
+	 * @param salary
+	 * @param bonus
+	 * @return
+	 * @throws SQLException
+	 */
 	public int updateEmp(Connection conn, String empId, String email, String phone, int salary, double bonus) throws SQLException{
+		// 1. 결과 저장용 변수/객체 선언
 		int result = 0;
-		
 		try {
-			
+			// 2. SQL 구문 작성
+			//	  PreparedStatement / Statement 생성
 			String sql = "UPDATE EMPLOYEE\r\n"
 					+ "SET EMAIL = ?,\r\n"
 					+ "	PHONE  = ?,\r\n"
@@ -210,17 +240,26 @@ public class EmpDAO {
 			pstmt.setDouble(4, bonus);
 			pstmt.setString(5, empId);
 			
+			// 3. 수행 후 결과 반환 받아 결과 저장용 변수에 저장
+			// select문 : executeQuery([sql]) / DML 문 : executeUpdate()
+			
 			result = pstmt.executeUpdate();
 			
 			
-		} finally {
+		} finally { // 4. JDBC 객체 자원 반환
 			close(pstmt);
 		}
-		
+		// 5. 결과 반환
 		return result;
 	}
 
 
+	/** 6. 사번으로 사원 정보 삭제(DELETE)
+	 * @param conn
+	 * @param input
+	 * @return result
+	 * @throws SQLException
+	 */
 	public int updateEmp(Connection conn, String input) throws SQLException {
 		int result = 0;
 		try {
@@ -238,26 +277,34 @@ public class EmpDAO {
 	}
 
 
-	public int updateEmpEnt(Connection conn, String input) throws SQLException {
-		int result = 0;
+	/**7. 사번이 일치하는 사원 퇴직 처리 SQL 수행
+	 * @param conn
+	 * @param input
+	 * @return result
+	 * @throws SQLException
+	 */
+	public void updateEmpEnt(Connection conn, String input) throws SQLException {
 		try {
 			String sql = "UPDATE EMPLOYEE \r\n"
 					+ "SET ENT_YN = 'Y',\r\n"
 					+ "	ENT_DATE = SYSDATE \r\n"
-					+ "WHERE EMP_ID = ?";
+					+ "WHERE EMP_ID = ? AND ENT_YN = 'N'";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, input);
-			
-			result = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 			
 		}finally {
 			close(pstmt);
 		}
-		return result;
 	}
 
 
+	/** 8. 가장 최근 입사한 사원 5명 조회
+	 * @param conn
+	 * @return
+	 * @throws SQLException
+	 */
 	public List<Emp> rankEmp(Connection conn) throws SQLException{
 		List<Emp> empList = new ArrayList<Emp>();
 		
@@ -299,16 +346,20 @@ public class EmpDAO {
 	}
 
 
-	public Map<String, Object> deptStatistic(Connection conn) throws SQLException {
-		Map<String, Object> empMap = new LinkedHashMap<>();
-		Map<Integer, Double> statistic = new HashMap();
+	/**9. 부서별 통계 조회 SQL 수행 후 결과 반환
+	 * @param conn
+	 * @return empList
+	 * @throws SQLException
+	 */
+	public List<Map> deptStatistic(Connection conn) throws SQLException {
+		List<Map> empList = new ArrayList<>(); // 1. 결과를 받을 변수 선언
 		try {
-		// Statement 구문 입력
-		String sql = "SELECT DEPT_TITLE, COUNT(*), AVG(SALARY)\r\n"
+		// 2. SQL 작성 후 수행
+		String sql = "SELECT DEPT_TITLE, COUNT(*), TO_CHAR(ROUND(AVG(SALARY)), '999,999,999') SALARY\r\n"
 				+ "FROM EMPLOYEE \r\n"
 				+ "LEFT JOIN DEPARTMENT ON (DEPT_CODE = DEPT_ID)\r\n"
 				+ "GROUP BY DEPT_TITLE, DEPT_CODE \r\n"
-				+ "ORDER BY DEPT_CODE;";
+				+ "ORDER BY DEPT_CODE";
 		
 		stmt = conn.createStatement();
 		rs = stmt.executeQuery(sql);
@@ -316,19 +367,61 @@ public class EmpDAO {
 		// 결과값 list에 입력
 		while(rs.next()) {
 			
-			String deptTitle = rs.getString(1);
+			String deptTitle = rs.getString(1); //
 			int count = rs.getInt(2);
-			double avg = rs.getDouble(3);
+			String avg = rs.getString(3);
+
+			Map<Integer, Object> empMap = new LinkedHashMap<>();
+										// 입력 순서가 유지되는 Map
 			
-			statistic.put(count, avg);
-			empMap.put(deptTitle, statistic.keySet());
+			empMap.put(0, deptTitle);
+			empMap.put(1, count);
+			empMap.put(2, avg);
+			
+			empList.add(empMap);
+			
 			}
 		}finally { // rs, stmt 반환
 		close(rs);
 		close(stmt);
 	}
 	// 결과값 반환
-	return empMap;	
+	return empList;	
+	}
+
+
+	/**7. 사번이 일치하는 사원 퇴직 처리에서 사원이 존재하는지, 존재하지만 퇴직한 사원인지 체크하는 SQL 수행 후 결과 반환
+	 * @param conn
+	 * @param input
+	 * @return check
+	 * @throws SQLException
+	 */
+	public int checkEmployee(Connection conn, String input) throws SQLException {
+		int check = 0;
+		
+		try {
+			String sql = "SELECT CASE\r\n"
+					+ "	WHEN (SELECT COUNT(*) FROM EMPLOYEE WHERE EMP_ID= ?) = 0\r\n"
+					+ "	THEN 0\r\n"
+					+ "	WHEN (SELECT COUNT(*) FROM EMPLOYEE WHERE EMP_ID= ? AND ENT_YN = 'Y') = 1\r\n"
+					+ "	THEN 1\r\n"
+					+ "	ELSE 2\r\n"
+					+ "END \"CHECK\"\r\n"
+					+ "FROM DUAL";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,  input);
+			pstmt.setString(2,  input);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				check = rs.getInt("CHECK");
+			}
+		}finally {
+		close(rs);
+		close(pstmt);
+		}
+		return check;
 	}
 	
 
