@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import edu.kh.jdbc.common.Session;
 import edu.kh.jdbc.member.model.dto.Member;
 
 public class MemberDAO {
@@ -77,6 +78,86 @@ public class MemberDAO {
 			close(stmt);
 		}
 		return memberList;
+	}
+
+
+
+
+
+
+	/**회원 기능 메뉴
+	 * 3. 회원 정보 수정 SQL 구문 실행 후 반환
+	 * @param conn
+	 * @param memberName
+	 * @param memberGender
+	 * @param memberNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updateMember(Connection conn, String memberName, String memberGender, int memberNo)  throws Exception
+	{	// 1. 결과 저장용 변수 선언
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("updateMember"); // SQL 작성, 수행
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberName);
+			pstmt.setString(2, memberGender);
+			pstmt.setInt(3, Session.loginMember.getMemberNo());
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+
+
+	/** 4. 비밀번호 변경(현재 비밀번호, 새 비밀번호, 새 비밀번호 확인) SQL 실행 후 반환
+	 * @param conn
+	 * @param presentMemberPw
+	 * @param newMemberPw
+	 * @param memberNo
+	 * @return
+	 * @throws Exception
+	 */
+	public int updatePassword(Connection conn, String presentMemberPw, String newMemberPw, int memberNo) throws Exception{
+		int result = 0;
+		try {
+			String sql = prop.getProperty("updatePassword");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, newMemberPw);
+			pstmt.setString(2, presentMemberPw);
+			pstmt.setInt(3, memberNo);
+			
+			result = pstmt.executeUpdate();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+
+
+	public int unregisterMember(Connection conn, String memberPw, int memberNo) throws Exception{
+		int result = 0;
+		
+		try {
+			String sql = prop.getProperty("unregisterMember");
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			pstmt.setString(2, memberPw);
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 }

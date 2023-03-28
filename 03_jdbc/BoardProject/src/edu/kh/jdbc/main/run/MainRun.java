@@ -8,7 +8,8 @@ public class MainRun {
 		
 		// 객체를 1회만 사용할 때 작성하는 방식
 		new MainView().mainMenu();
-
+	
+		
 	}
 	
 	
