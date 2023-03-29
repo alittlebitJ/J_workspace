@@ -5,13 +5,15 @@ import java.util.List;
 import static edu.kh.jdbc.common.JDBCTemplate.*;
 
 import edu.kh.jdbc.board.model.dao.BoardDAO;
+import edu.kh.jdbc.board.model.dao.CommentDAO;
 import edu.kh.jdbc.board.model.dto.Board;
+import edu.kh.jdbc.board.model.dto.Comment;
 
 // Service : 데이터 가공, 트랜잭션 처리
 public class BoardService {
 	
 	private BoardDAO dao = new BoardDAO();
-	
+	private CommentDAO commentDao = new CommentDAO();
 	
 	
 
@@ -43,6 +45,18 @@ public class BoardService {
 		Board board = dao.selectBoard(conn, input); // memberNo는 지금 안 씀
 		// 3. 게시글이 조회된 경우
 		if(board != null) {
+			
+            //******************************************************************************
+			
+			// ** 해당 게시글에 대한 댓글 목록 조회 DAO 호출 **
+			List<Comment> commentList = commentDao.selectCommentList(conn, input);
+			
+			// board에 댓글 목록 세팅
+			board.setCommentList(commentList);
+
+			//******************************************************************************
+
+			
 // 			4. 조회수 증가 ( 단, 게시글 작성자와 로그인한 회원이 다를 경우에만)
 			if (board.getMemberNo() != memberNo) {
 				// 조회한 게시글 회원 번호와 로그인한 회원 번호가 다를 경우

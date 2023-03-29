@@ -51,6 +51,7 @@ public class JDBCTemplate {
 				String url = prop.getProperty("url");
 				String user = prop.getProperty("user");
 				String pw = prop.getProperty("pw");
+				
 					
 				
 				// Oracle JDBC Driver 객체 메모리 로드
