@@ -1,0 +1,120 @@
+/* ctrl + / : 범위주석 */
+/* 파일 전체가 style 태그 내부라고 생각하면 됨(선택자, CSS 코드 작성) */
+
+
+
+
+
+/* 기본 속성 선택자 */
+/* div 태그 중 name 속성 값이 'name-1'인 요소의 배경색 지정 */
+div[name="name-1"]{background-color: lightcoral;}
+
+/* p 태그 중 name 속성 값이 'name-1'인 요소의 배경색 지정 */
+p[name='name-1'] {background-color: lightgoldenrodyellow;}
+
+/* name 속성 값이 'name-1'인 요소의 배경색 지정 */
+[name=name-2]{background-color: lightblue;}
+
+/* class 속성 값이 name-test인 요소 중 name 속성 값이 name-2인 요소만 선택 */
+.name-test[name=name-2]{background-color: lightcyan;}
+
+
+
+
+/* 자식 선택자 */
+/* 아이디가 parent1인 요소의 자식 li에 배경색 지정*/
+#parent1 > li{background-color: lightgoldenrodyellow;}
+
+/* 아이디가 parent1인 요소의 자식 중, 클래스가 parent1-child인 요소에 배경색 지정*/
+#parent1 > .parent1-child{background-color: lightblue;}
+
+/* 클래스가 parent1-child인 요소 중에 strong인 글자색 지정*/
+.parent1-child > strong{color: white;}
+#parent1 > li > strong {font-size: 24px;}
+
+#parent1 > .parent1-child > span {color : teal;}
+
+/* 후손 선택자 */
+#parent2 {border:3px solid teal}
+
+/* 아이디가 parent2인 요소의 후손 중 p태그 요소를 모두 선택 */
+#parent2 p{background-color: antiquewhite;}
+
+
+/* 반응 선택자(가상 클래스) */
+.div-cls{
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    background-color: antiquewhite;
+
+    margin-bottom: 30px; /* 아래쪽 다른 요소와의 간격을 30px */
+
+    cursor: pointer; /* 요소에 마우스가 올라오면 손가락 모양으로 변경 */
+}
+
+/* :active */
+#activeTest:active{
+    background-color: cornsilk;
+}
+
+/* hover */
+#hoverTest:hover{
+    width: 220px;
+    height: 220px;
+    background-color: lightpink;
+}
+
+/* #hoverTest의 스타일이 변하는 시간을 0.5초로 지정 */
+#hoverTest{transition-duration:0.5s;}
+
+/* :focus */
+#focusTest:focus{background-color: lightgreen;}
+
+/* :checked */
+/* name이 fruits인 checkbox가 체크 되었을 때 */
+[name="fruits"]:checked{
+    width: 30px;
+    height: 30px;
+    background-color: red;
+    /* radio, checkbox는 크기를 지정하는 css를 제외한 스타일은 적용 되지 않는다 */
+}
+
+/* :enabled / :disabled */
+#parent3 > input:enabled{background-color: tomato;}
+#parent3 > input:disabled{background-color: teal;}
+
+/* 동위 선택자 */
+/* 내용이 2번입니다인 div요소를 선택 */
+#div1 + div {background-color: darkgrey;}
+#div3 ~ div {background-color: aquamarine;}
+#div3 ~ * {font-family: '굴림';}
+
+/* [checkbox 모양 바꾸기] */
+/* label 스타일 지정하기 */
+#check1 + label{
+    border: 1px solid black;
+    width: 30px;
+    height: 30px;
+    /* label은 기본적으로 inline형식. 크기 지정 불가능 */
+
+    /* display속성 : 요소가 표시되는 형식을 지정 */
+    /* inline-block : 수평 분할 + 크기 지정 가능 */
+    display: inline-block;
+    cursor: pointer;
+    /* 모서리 라운딩 처리 */
+    border-radius: 50%;
+}
+
+/* 체크된 #check1 다음에 있는 label 선택 */
+#check1:checked+ label {
+    background-image: url(/images/check.png);
+    background-repeat: no-repeat;
+   /*  background-size: cover; */
+   background-size: 24px;
+   background-position: 1px 6px;
+}
+
+/* #check1을 존재는 하되 화면에는 보이지 않게 지정 */
+#check1{display: none;}
+
