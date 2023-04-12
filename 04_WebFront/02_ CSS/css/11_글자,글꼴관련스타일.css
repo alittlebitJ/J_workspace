@@ -1,0 +1,54 @@
+/* color 속성 */
+#colorList>li{
+    font: size 24px;
+    font-weight: bold;
+}
+
+#colorList>li:nth-child(1){color: darkcyan}
+#colorList>li:nth-child(2){color: rgb(80, 100, 100)}
+#colorList>li:nth-child(3){color: rgba(20, 80, 50, 0.2)}
+#colorList>li:nth-child(4){color: #655}
+#colorList>li:nth-child(5){color: #485123}
+#colorList>li:nth-child(6){color: hsl(140, 87%, 21%)}
+#colorList>li:nth-child(7){color: hsla(26, 100%, 52%, 0.3)}
+
+#decorationList>li:nth-child(1){text-decoration: overline;}
+#decorationList>li:nth-child(2){text-decoration: line-through;}
+#decorationList>li:nth-child(3){text-decoration: underline;}
+#decorationList>li:nth-child(4)>a{text-decoration: none;}
+
+/* text-align */
+#alignTest>p:nth-child(1){text-align: left;}
+#alignTest>p:nth-child(2){text-align: right;}
+#alignTest>p:nth-child(3){text-align: center;}
+#alignTest>p:nth-child(4){text-align: justify;}
+
+#lineHeight{line-height: 30px;}
+#letterSpacing{letter-spacing: -3px;}
+
+/* font-family */
+#fontFamily>li:nth-child(1){font-family: '굴림';}
+#fontFamily>li:nth-child(2){font-family: '고딕';}
+#fontFamily>li:nth-child(3){font-family: '바탕';}
+#fontFamily>li:nth-child(4){font-family: ;}
+
+@font-face {
+    font-family: 'EF_jejudoldam';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-EF@1.0/EF_jejudoldam.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+#fontFamily>li:nth-child(5){font-family: 'EF_jejudoldam';}
+
+
+/* 다운 받은 폰트 적용 */
+@font-face{
+    font-family: 'Gugi';
+    src: url('Gugi-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#fontFamily>li:nth-child(6){font-family: 'Gugi';}

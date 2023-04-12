@@ -1,0 +1,73 @@
+.area1{background-color: lightblue;}
+.area2{background-color: lightgray;}
+.area3{background-color: lightgoldenrodyellow;}
+.area4{background-color: lightcyan;}
+.area5{background-color: lightcoral;}
+.block {
+    border:1px solid black;
+    width: 150px;
+    height: 150px;
+    color:white;
+    display:block; /* 요소 형식을 block으로 지정 */
+}
+.inline{display:inline;}/* 요소 형식을 block으로 지정 */
+.inline-block {display:inline-block;}/* 요소 형식을 inline-block으로 지정 */
+
+/* 상하 2분할 */
+/* 감싸는 요소 스타일 지정 */
+.container-1{
+    border: 1px solid black;
+    width: 320px;
+    height: 450px;
+}
+
+.div1-1{height: 30%;} /* 가변 길이 단위% : 감싸고 있는 요소(부모 요소) 높이의 30% */
+.div1-2{height: 70%;}
+/* 높이만 지정했는데 옆으로 꽉찬 이유는? block형식 이라서 */
+
+/* 상하 3분할 */
+.container-2{
+    width: 500px;
+    height: 300px;
+}
+
+.container-2>div:first-child{height: 15%;}
+.container-2>div:first-child + div{height: 35%;}
+.container-2>div:last-child{height: 50%;}
+
+/* 좌우 2분할 */
+.container-3 {
+    border:1px solid red;
+    width: 400px;
+    height: 200px;
+}
+
+.container-3>div{
+    display:inline-block;
+    width: 50%;
+    height: 100%;
+}
+
+.container-3>div:first-child{background-color: darksalmon;}
+.container-3>div:last-child{background-color: darkkhaki;}
+
+
+.container-4 {
+    border:1px solid green;
+    width: 300px;
+    height: 300px;
+}
+
+.row{
+    width: 100%; /* block 형식 요소이기 때문에 생략해도 width:100% */
+    height: 50%;
+}
+
+.col{
+    width: 50%;
+    height: 100%;
+    display: inline-block;
+}
+
+/* display : none */
+.non-test{display: none;}

@@ -1,0 +1,98 @@
+div{
+    border: 1px solid black;
+    /* box-sizing */
+    /* width, height의 값이 적용되는 범위를 지정하는 속성 */
+    /* content-box : content에만 적용 */
+    /* border-bod : content + padding + border의 합이 width/height와 같도록 content 크기를 자동 조절 */
+
+    box-sizing: content-box;
+}
+
+.container-1 {
+    border: 2px solid red;
+    position: relative;
+    /* 내부에 작성되는 요소에 상대적 위치를 지정할 수 있는 기준점으로 선언 */
+    width: 300px;
+    height: 300px;
+}
+
+.first{
+    width: 100%;
+    height: 100%;
+    background-color: lightyellow;
+}
+
+.second{
+    width: 200px;
+    height: 200px;
+    background-color: lightblue;
+    
+    position: absolute;
+    /* 요소의 기존 배치 순서를 무시하고 겹쳐서 배치 */
+    top : 50px;
+    left : 50px;
+    z-index : 2 ;
+    /* top, bottom, left, right는 각 방향으로부터 얼마만큼 떨어져 있는가를 지정 */
+}
+
+.third{
+    width: 100px;
+    height: 100px;
+    background-color: lightseagreen;
+
+    position : absolute;
+    top: 100px;
+    left: 100px;
+    z-index : 3;
+}
+
+
+/* 요소 정가운데 배치 */
+.container-2{
+    width: 800px;
+    height: 800px;
+
+    position : relative; /* 기준->자식요소 상대위치 지정 가능 */
+}
+
+.center{
+    width: 50px;
+    height: 50px;
+    background-color: darkcyan;
+    position:absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin : auto;
+}
+
+/* fixed */
+.fixed-area {
+    width: 40px;
+    height: 20px;
+    position:fixed;
+    bottom: 30px;
+    right:50px;
+    z-index:1000;
+    background-color: darkgreen;
+    border-radius: 30%;
+    text-align:center;
+}
+
+.fixed-area>a{
+    color: aliceblue;
+    text-decoration: none; /* 밑줄 삭제 */
+    font-weight: bold;
+}
+
+.sticky{
+    background-color: darkolivegreen;
+    color: beige;
+    padding: 10px 30px;
+    
+    position: sticky;
+    /* 화면에서 벗어날 경우 지정 위치 고정 */
+    top: 0;
+    z-index : 500;
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login_mypettitions</title>
+    <link rel="stylesheet" href="css/login_mypettitions.css">
+    <link rel="stylesheet" href="css/20_반응형웹(미디어쿼리).css">
+    <!-- font awesome 라이브러리 추가 + key 등록 -->
+    <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <header>
+        </header>
+
+        <!-- 열기 버튼 -->
+        <button type="button" class="fa-solid fa-bars nav-btn" id="openBtn"></button>
+        <nav>
+            <!-- 닫기 버튼 -->
+            <button type="button" class="fa-solid fa-bars nav-btn" id="closeBtn"></button>
+            <ul>
+                <li><a href="#">공지사항</a></li>
+                <li><a href="#">자유 게시판</a></li>
+                <li><a href="#">질문 게시판</a></li>
+                <li><a href="#"> FAQ</a></li>
+                <li><a href="#">1:1문의</a></li>
+            </ul>
+        </nav>
+        <section class="content">
+            <section class="content-1">
+            <div class="loginMyPettitionsID">JJ</div>
+            <div class="loginMyPettitionsLocation">South Korea</div>
+            <button>Edit profile</button>
+            </section>
+            <ul>
+                <li><a href="#">Start(1)</a></li>
+                <li><a href="#">Signed(2)</a></li>
+            </ul>
+            <section class="content-2">
+                <!-- method="POST" : 제출 되는 값이 주소에 안 보임 -->
+                <form action="#" method="post">
+                    <fieldset class="id-pw-area">
+                        <section>
+                            <input type="text" name="inputId" placeholder="아이디">
+                            <input type="password" name="inputPw" placeholder="비밀번호">
+                        </section>
+                        <section>
+                            <button>로그인</button>
+                        </section>
+                    </fieldset>
+                    <label>
+                        <input type="checkbox" name="saveId">아이디 저장
+                    </label>
+                    <article class="signup-find-area">
+                        <a href="#">회원가입</a>
+                        <span>|</span>
+                        <a href="#">ID/PW 찾기</a>
+                    </article>
+                </form>
+            </section>
+        </section>
+    </main>
+    <footer>
+    </footer>
+    <script>
+     
+        // 자바스크립트 작성 영역
+        
+        // 열기 버튼
+        const openBtn = document.getElementById('openBtn');
+
+        // 닫기 버튼
+        const closeBtn = document.getElementById('closeBtn');
+
+        const nav = document.querySelector('nav')
+
+        // 열기 버튼을 누르면 nav의 display가 flex로 변함
+        openBtn.addEventListener("click", ()=>{
+            nav.style.display = "flex";
+        } )
+
+        // 닫기 버튼을 누르면 nav의 display가 none으로 변경
+        closeBtn.addEventListener('click', function(){
+            nav.style.display = 'none';
+        });
+
+        /* 화면 너비가 1024px을 초과했을 때 nav의 style속성 제거 */
+        window.addEventListener("resize", () => {
+            if(window.innerWidth > 1024){
+                nav.removeAttribute("style");
+            }
+        });
+
+
+
+    </script>
+</body>
+</html>
