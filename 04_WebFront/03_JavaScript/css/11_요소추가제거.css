@@ -1,0 +1,27 @@
+body{
+    padding: 20px 40px;
+}
+
+pre{
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding-top: 20px;
+}
+
+.row{
+    margin: 8px 0;
+}
+
+.remove-row{
+    display: inline-block;
+    margin-left: 2px;
+    font-size: 20px;
+    cursor: pointer;
+    user-select: none;
+    color: gray;
+}
+
+.remove-row:hover{
+    color: black;
+    font-weight: bold;
+}

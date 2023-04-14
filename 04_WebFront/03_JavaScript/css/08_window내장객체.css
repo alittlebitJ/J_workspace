@@ -1,0 +1,39 @@
+body{
+    padding: 20px 40px;
+}
+
+code{
+    color:olive;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: '바탕체';
+}
+
+pre{
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding-top: 20px;
+}
+
+#loadingTime{
+    border: 1px solid #000;
+    width: 100px;
+    height: 30px;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#clock{
+    border: 1px solid #000;
+    width: 300px;
+    height: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    font-size: 50px;
+    font-weight: bold;
+}
