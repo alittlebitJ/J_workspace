@@ -1,29 +1,40 @@
 package practice_ct;
 
+
 public class CodeTest {
 	// 2차원 정수 배열 score
     
-    public int[] solution(int[][] score) {
-        int[] answer = {};
+	public static void main(String[] args) {
+		
+		int[] ingredient = {2, 1, 1, 2, 3, 1, 2, 3, 1};
+		int answer = 0;
 
-        
-        int[][] classScore = {{80, 70}, {90, 50}, {40, 70}, {50, 80}};
-        int[] personScore = new int[classScore.length];
-        
-        
-        // 각 항생의 평균값을 구해 personScore 배열에 입력
-        for(int i=0; i<classScore.length; i++) {
-           personScore[i] = (classScore[i][0] + classScore[i][1])/2;
-        }
-        
-        // 평균값을 비교
-        for(int j=1; j<personScore.length; j++) {
-           if(personScore[j] == personScore[j-1]) {}
-           else if(personScore[j] > personScore[j-1]) {}
-           else //'personScore[j] < personScore[j-1]'인 경우 
-        	   {}
-        }
-        
-        return answer;
-    }
-}
+		int[] check = {1, 2, 3, 1};
+		int count = 0;
+		
+		/*
+		 * ingredient를 훑으며 check의 0번 인덱스와 같은지 찾아보고
+		 * 0번 인덱스와 같으면 2,3,4번 인덱스도 다음 숫자와 같은지 확인해보기
+		 * 단 훑는 과정에서 ingredient의 숫자가 check의 개수만큼 남아있어야 함
+		 * */
+		
+		for(int i=0; i<=ingredient.length-check.length; i++) {
+			// 만약 check의 0번 인덱스와 같으면 다음, 다다음, 다다다음 숫자도 check와 같은지 확인해보기
+			count=0;
+			if(ingredient[i]==check[0]) {
+				for(int j=0; j<check.length; j++) {
+					if(ingredient[i+j]==check[j])	{
+						count++;
+						continue;
+					}
+					else 				break;
+				}
+				if(count==check.length) answer++;
+			}
+		}
+		System.out.println(answer);
+		
+	} // main 끝
+	
+	 
+}    
