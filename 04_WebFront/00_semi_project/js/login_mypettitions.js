@@ -5,23 +5,41 @@ const start = document.getElementById("start");
 const signed = document.getElementById("signed");
 const userProfileframe = document.getElementsByClassName("userProfileframe")[0];
 
+
+// 나중에 DB에서 받아 올 숫자들 임시로 선언
+// num1 : start 글 개수(작성글)
+// num2 : signed 글 개수(서명한 글)
+num1 = 3;
+num2 = 2;
+
 // tab[0](start) 탭을 누르면 작성한 청원글이 나오는 함수
 start.addEventListener("click", () => {
-    myPettitionTabs();
+    myPettitionTabs(num1); // start 글 개수를 매개변수로 전달
 });
 
 signed.addEventListener("click", () => {
-    myPettitionTabs();
+    myPettitionTabs(num2); // signed 글 개수를 매개변수로 전달
 });
 
 
-function myPettitionTabs() {
-    .innerHTML = ""; // 이전에 생성된 내용을 모두 삭제
+function myPettitionTabs(num) {
       // defaultbox를 만들어 DB에 작성된 내 작성글 중 하나를 입력
-      for(let i = 0; i < 3; i++){ // DB에 있는 내 작성 청원 개수를 받아와 개수만큼 실행(3은 임시로 삽입)
+      // 만약 이미 start/signed 버튼을 눌러 내 start/signed가 나와있는 화면이면 기존 div 다 삭제하고 다시 생성
+      if(userProfileframe.childElementCount>2) {
+        const defaultboxToRemove = document.querySelectorAll(".defaultbox");
+        defaultboxToRemove.forEach(e => {
+            e.parentNode.removeChild(e);
+        });
+      }
+      for(let i = 0; i < num; i++){ // DB에 있는 내 작성 청원 개수를 매개변수로 받아와 개수만큼 실행
         // defaultbox 생성(큰 틀 생성)
         const defaultbox = document.createElement("div");
         defaultbox.classList.add("defaultbox");
+
+        // defaultbox에 클릭하면 Mypettitions dashboard로 이동하는 이벤트 추가
+        defaultbox.addEventListener("click", e => {
+            location.href = "/vote/myPetitions/myPetitionsDashboard/myPetitionsDashboard.html";
+        });
         
         // myPettitionStatus 생성(청원 상태 창 생성)
         const myPettitionStatus = document.createElement("div");
