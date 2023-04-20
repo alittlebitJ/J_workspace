@@ -4,9 +4,9 @@
     margin: 0;
 }
 
-div, main, section, header, footer, article, nav, aside, form
+/* div, main, section, header, footer, article, nav, aside, form
 {border: 1px solid black;}
-
+ */
 main{
 }
 
@@ -34,12 +34,19 @@ div{
 
 /* 본문 */
 .userProfile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* 반응형으로 바꿀 시 움직이는 한 뭉치 */
+/* 반응형으로 할 시에 움직이는 한 뭉치 */
+.userProfileframe{
+    width: 80%;
+    max-width: 960px;
+}
+
+
 .row{
-    margin-left: -10px;
-    margin-right: -10px;
     display: table;
 }
 
@@ -48,6 +55,12 @@ div{
     text-align: center !important;
 }
 
+/* user profile이 적힌 row를 가운데로 */
+.userProfileframe > .row {
+    display: flex;
+    justify-content: center;
+    align-items: ;
+}
 
 /* login_mypettitions 아이디 */
 .userProfileID{
@@ -62,7 +75,7 @@ div{
 }
 
 /* edit profile 버튼 */
-.EditProfileText>button{
+.EditProfileText>a{
     width: 101.52px;
     background-color: #fff;
     cursor: pointer;
@@ -70,23 +83,31 @@ div{
     padding: 8px 16px;
     border: 1px solid lightgray;
     border-radius: 5px;
+    font-size: 12px !important;
+}
+
+/* edit profile 버튼 hover시 하단에 빨간 줄이 나오는 설정(start/signed nav바에 적용되는) 제거 */
+.EditProfileText>a:hover{
+    border: 1px solid lightgray !important;
 }
 
 /* tabs */
-.userProfile>ul{
+.userProfileframe>ul{
     display: flex;
-    justify-content: center;
+    justify-content: left;
     list-style: none;
     height: 34px;
+    border-bottom: 1px solid #ccc;
+    margin-top: 50px;
 }
 
 /* tabs 속 list */
-.userProfile>ul>li{
+.userProfileframe>ul>li{
     flex: 0 1 150px; /* flex : grow, shrink, basis를 순서대로 지정 */
 }
 
 /* tabs 속 list 속 (Start, Signed) */
-.userProfile a {
+.userProfileframe a {
     font-weight: bold;
     padding: 11px 0; /* a태그는 기본적으로 inline */
     display: block;
@@ -94,17 +115,86 @@ div{
     text-decoration: none;
     color: black;
     margin: 0px 0px -1px;
-    padding: 8px 0px;
+    padding: 6px 0px;
     text-align:center;
-    border-radius: 5px;
     transition-duration: 0.2s;
 }
 
 /* started, signed 탭 메뉴 hover */
-.userProfile a:hover{
+.userProfileframe a:hover{
     color: #e01a2b;
+    border-bottom: 2px solid red;
 }
 
+
+
+.userProfileframe > .defaultbox {
+    margin: 25px 0px;
+    border: 1px solid #737273;
+    border-radius: 5px;
+}
+
+
+
+/* myPettitionStatus 청원 진행 상태 */
+.defaultbox > .myPettitionStatus{
+    margin-bottom: 3px !important;
+    line-height: 1.5;
+}
+
+
+.defaultbox > .myPettitionStatus > div{
+    margin-bottom: 20px !important;
+    background-color: #f6f4f6;
+    border-right: 10px;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: .15em;
+    line-height: 1.5;
+    padding: 0.3em 0.9em;
+    cursor: pointer;
+}
+
+
+
+/* myPettitionTitle 청원 타이틀 양식 */
+.myPettitionTitle {
+    font-size: 24px !important;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* myPettitionText 청원 본문 양식 */
+.myPettitionText{
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 1em;
+    margin-inline-end: 1em;
+    cursor: pointer;
+    line-height: 1.5;
+}
+
+/* myPettitionWriter 청원 글 작성자 양식 */
+
+/* myPettitionSupporter 서포터 수 양식 */
+.myPettitionSupporter, .myPettitionWriter {
+    text-align: right !important;
+    cursor: pointer;
+    float: left;
+    padding-left: 10px;
+    padding-right: 10px;
+    flex-grow: 1;
+}
+
+.myPettitionWriter{
+   text-align: left !important;
+}
+
+.defaultbox > .myPettitionBottom {
+    display: flex;
+    width: 100%;
+}
 
 footer{
 }
