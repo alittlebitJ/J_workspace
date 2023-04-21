@@ -1,0 +1,27 @@
+/* 프로필 편집 텍스트 */
+.row > #EditProfileTitle {
+    font-size: 36px;
+    text-align: center !important;
+    line-height: 1.22 ;
+    margin: 50px;
+    font-weight: bold;
+}
+
+/* 이미지 미리보기, 파일 업로드 버튼을 담은 div */
+#EditProfileContainer {
+    padding-top: 5px;
+    text-align: center !important;
+    line-height: 1.5;
+}
+
+/* 이미지 미리보기 화면 */
+#image_container {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: block;
+    border: 1px solid #ccc;
+}
+
+/* 파일 업로드를 담은 div */
