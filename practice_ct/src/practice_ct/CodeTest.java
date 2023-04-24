@@ -1,6 +1,7 @@
 package practice_ct;
 
 import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,19 +39,22 @@ public class CodeTest {
    
    public static int[] solution(String[] name, int[] yearning, String[][] photo) {
 	   
-	   	int[] answer = {};
-	   	Map<String, Integer> missing = new HashMap<>();
-	   	int index = 0;
+	   	int[] answer = new int [photo[0].length];
+	   	int count = 0;
 	   	
-		// name값과 yearning 값을 map으로 mapping (중복되지 않는 name이 key값)
-		for(int i=0; i<name.length; i++) {
-			missing.put(name[i], yearning[i]);
-		}
-		
-		
-		for(String[] pt : photo) {
-			System.out.println();
-		}
+	   	// photo에 배열을 하나씩 거냄
+	   	for(String[] pt : photo) {
+	   		int sum = 0;
+	   		// name에서 하나씩 꺼내서 photo에 있는 사람을 훑고
+	   		for(int i=0; i<name.length; i++) {
+	   			for(int j=0; j<pt.length; j++) {
+	   				if(name[i].equals(pt[j])) {
+	   					sum += yearning[i];
+	   				}
+	   			}
+	   		}
+	   		answer[count++] = sum;
+	   	}
 		
 		
 //		System.out.println(missing.keySet().contains(photo[0][0]));

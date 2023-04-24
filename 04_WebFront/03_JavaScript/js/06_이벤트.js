@@ -133,8 +133,8 @@ document.getElementById("moveGoogle").addEventListener("click", function(e){
 // prevent : 막다, 예방하다
 });
 
-// form 태그 기본 이벤트 제거 1
-// submit 버튼을 없애고 일반 button이 클릭 되었을 때 조건이 맞으면 submit 하게 만들기.
+// //form 태그 기본 이벤트 제거 1
+// //submit 버튼을 없애고 일반 button이 클릭 되었을 때 조건이 맞으면 submit 하게 만들기.
 
 // document.getElementById("btn").addEventListener("click", function(){
 //     // 작성된 아이디, 비밀번호 얻어 오기
