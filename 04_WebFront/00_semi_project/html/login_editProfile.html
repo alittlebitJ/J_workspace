@@ -9,26 +9,42 @@
     <link rel="stylesheet" href="/04_WebFront/00_semi_project/css/myPettitions.css">
 </head>
 <body>
-    <div class="editProfile content">
-        <div class="editProfileframe contentbox">
-            <div class="row">
-                <div id="EditProfileTitle">프로필 편집</div>
+    <div class="content" id="editProfile">
+        <div class="contentbox" id="EditProfileContainer">
+            <div class="EditProfileTopFrame">
+                <div class="row">
+                    <div id="EditProfileTitle">프로필 편집</div>
+                </div>
             </div>
-            <div id="EditProfileContainer">
-                <div>
-                    <div id="image_container"></div>
+            <div>
+                <div id="image_container"></div>
+            </div>
+            <div>
+                <label class="upload-photo">Upload photo</label>
+            </div>
+            <div id="editPrifileNameFrame">
+                <label class="edit-profile-text">닉네임</label>
+                <div id="editProfileInputName">
+                    <input type="text" class="editProfileInput" placeholder="홍길동">
+                    <button class="edit-profile-btn">중복확인</button>
                 </div>
-                <div>
-                    <label class="upload-photo">Upload photo</label>
+            </div>
+            <div>
+                <label class="edit-profile-text">자기소개</label>
+                <textarea id="editProfileDescription" placeholder="자신기자신에 대한 짧은 소개를 적어주세요"
+                row="6" maxlength="255"></textarea>
+            </div>
+            <div id="editPrifileNameFrame">
+                <label class="edit-profile-text">지역</label>
+                <div id="editProfileInputName">
+                    <input type="text" class="editProfileInput">
+                    <button class="edit-profile-btn">주소찾기</button>
                 </div>
-                <div>
-                    <label class="edit-profile-text">이름</label>
-                    <input type="text" id="editProfileName">
-                </div>
-                <div>
-                    <label class="edit-profile-text">자기소개</label>
-                    <textarea" id="editProfileDescription" placeholder="자신에 대한 간단한 소개를 해보세요" rows="6"
-                    maxlength="255"></textarea>
+            </div>
+            <div id="editPrifileNameFrame">
+                <label class="edit-profile-text">상세주소</label>
+                <div id="editProfileInputName">
+                    <input type="text" class="edit-profile-input-long" placeholder="중구 남대문로 120 KH 정보교육원 종로지원">
                 </div>
             </div>
         </div>
