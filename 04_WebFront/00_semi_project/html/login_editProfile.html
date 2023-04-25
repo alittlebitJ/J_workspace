@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit profile</title>
-    <link rel="stylesheet" href="/00_semi_project/css/login_editProfile.css">
-    <link rel="stylesheet" href="/00_semi_project/css/myPettitions.css">
+    <link rel="stylesheet" href="/04_WebFront/00_semi_project/css/login_editProfile.css">
+    <link rel="stylesheet" href="/04_WebFront/00_semi_project/css/myPettitions.css">
 </head>
 <body>
     <div class="editProfile content">
@@ -19,14 +19,18 @@
                     <div id="image_container"></div>
                 </div>
                 <div>
-                    <input type="file">
+                    <label class="upload-photo">Upload photo</label>
+                </div>
+                <div>
+                    <label class="edit-profile-text">이름</label>
+                    <input type="text" id="editProfileName">
+                </div>
+                <div>
+                    <label class="edit-profile-text">자기소개</label>
+                    <textarea" id="editProfileDescription" placeholder="자신에 대한 간단한 소개를 해보세요" rows="6"
+                    maxlength="255"></textarea>
                 </div>
             </div>
-            </div>
-            <ul class="tabs">
-                <li><a href="#" id="start">Start(3)</a></li>
-                <li><a href="#" id="signed">Signed(2)</a></li>
-            </ul>
         </div>
     </div>
 </body>
