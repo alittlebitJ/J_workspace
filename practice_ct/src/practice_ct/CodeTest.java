@@ -1,10 +1,6 @@
 package practice_ct;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 
 
 public class CodeTest {
@@ -39,7 +35,7 @@ public class CodeTest {
    
    public static int[] solution(String[] name, int[] yearning, String[][] photo) {
 	   
-	   	int[] answer = new int [photo[0].length];
+	   	int[] answer = new int [photo.length];
 	   	int count = 0;
 	   	
 	   	// photo에 배열을 하나씩 거냄
@@ -50,6 +46,7 @@ public class CodeTest {
 	   			for(int j=0; j<pt.length; j++) {
 	   				if(name[i].equals(pt[j])) {
 	   					sum += yearning[i];
+	   					break;
 	   				}
 	   			}
 	   		}

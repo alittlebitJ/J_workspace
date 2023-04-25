@@ -5,49 +5,57 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit profile</title>
-    <link rel="stylesheet" href="/04_WebFront/00_semi_project/css/login_editProfile.css">
-    <link rel="stylesheet" href="/04_WebFront/00_semi_project/css/myPettitions.css">
+    <link rel="stylesheet" href="/00_semi_project/css/login_editProfile.css">
+    <link rel="stylesheet" href="/00_semi_project/css/myPettitions.css">
 </head>
 <body>
-    <div class="content" id="editProfile">
-        <div class="contentbox" id="EditProfileContainer">
-            <div class="EditProfileTopFrame">
-                <div class="row">
-                    <div id="EditProfileTitle">프로필 편집</div>
+    <form action="#" method="get">
+        <div class="content" id="editProfile">
+            <div class="contentbox" id="editProfileContainer">
+                <div class="edeit-profile-top-frame">
+                    <div class="row">
+                        <div id="editProfileTitle">프로필 편집</div>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <div id="image_container"></div>
-            </div>
-            <div>
-                <label class="upload-photo">Upload photo</label>
-            </div>
-            <div id="editPrifileNameFrame">
-                <label class="edit-profile-text">닉네임</label>
-                <div id="editProfileInputName">
-                    <input type="text" class="editProfileInput" placeholder="홍길동">
-                    <button class="edit-profile-btn">중복확인</button>
+                <div>
+                    <div id="imageContainer"></div>
                 </div>
-            </div>
-            <div>
-                <label class="edit-profile-text">자기소개</label>
-                <textarea id="editProfileDescription" placeholder="자신기자신에 대한 짧은 소개를 적어주세요"
-                row="6" maxlength="255"></textarea>
-            </div>
-            <div id="editPrifileNameFrame">
-                <label class="edit-profile-text">지역</label>
-                <div id="editProfileInputName">
-                    <input type="text" class="editProfileInput">
-                    <button class="edit-profile-btn">주소찾기</button>
+                <div>
+                    <label class="upload-photo">Upload photo</label>
                 </div>
-            </div>
-            <div id="editPrifileNameFrame">
-                <label class="edit-profile-text">상세주소</label>
-                <div id="editProfileInputName">
-                    <input type="text" class="edit-profile-input-long" placeholder="중구 남대문로 120 KH 정보교육원 종로지원">
+                <div id="editPrifileNameFrame">
+                    <label class="edit-profile-text">닉네임</label>
+                    <div id="editProfileInputName">
+                        <input type="text" class="edit-profile-input" placeholder="홍길동">
+                        <button class="edit-profile-btn" type="button">중복확인</button>
+                    </div>
+                </div>
+                <div>
+                    <label class="edit-profile-text">자기소개</label>
+                    <textarea id="editProfileDescription" placeholder="자신기자신에 대한 짧은 소개를 적어주세요"
+                    row="6" maxlength="255"></textarea>
+                </div>
+                <div>
+                    <label class="edit-profile-text">지역</label>
+                    <div id="editProfileInputName">
+                        <input type="text" class="edit-profile-input">
+                        <button class="edit-profile-btn" type="button">주소찾기</button>
+                    </div>
+                </div>
+                <div>
+                    <label class="edit-profile-text">상세주소</label>
+                    <div id="editProfileInputName">
+                        <input type="text" class="edit-profile-input-long" placeholder="중구 남대문로 120 KH 정보교육원 종로지원">
+                    </div>
+                </div>
+                <div id="goRight">
+                    <div class="submit-cancel-button-frame">
+                        <button id="submit" class="submit-cancel-button">저장</button>
+                        <button id="cancel" class="submit-cancel-button">취소</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 </body>
 </html>
