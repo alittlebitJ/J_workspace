@@ -1,0 +1,214 @@
+/* div, main, section, header, footer, article, nav, aside, form
+{border: 1px solid black;} */
+
+/* 대시보드 업데이트를 담는 텍스트 */
+#dashboardUpdateContainer {
+    text-align: center !important;
+    line-height: 1.5;
+    width: 80%;
+    max-width: 620px;  /* 920px이 너무 커서 620px로 줄여서 맞춤 */
+}
+
+/* 청원 지지자 업데이트 텍스트를 담는 Frame */
+.edeit-profile-top-frame {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* 청원 지지자 업데이트 타이틀 텍스트 */
+#dashboardUpdateTitle {
+    display: block;
+    
+    margin-top: 50px;
+    margin-bottom: 30px;
+    padding-left: 4px;
+    
+    font-size: 36px;
+    font-weight: bold;
+    text-align: left;
+}
+
+/* 청원글 본문 서브 타이틀 텍스트 */
+#dashboardUpdateSubtitle {
+    display: block;
+    
+    margin-top: 50px;
+    margin-bottom: 30px;
+    padding-left: 4px;
+    
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+}
+
+/* input/text area위의 텍스트 */
+.dashboard-update-text{
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: left;
+    padding-left: 4px;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+/* Dashboard-Update 페이지의 input */
+.dashboard-update-input {
+    display: inline-block;
+    width: 100%;
+    height: 50px;
+    padding : 10px;
+    border: 1px solid #dbd9db;
+    border-radius: 5px;
+}
+
+/* Dashboard-Update 페이지의 사진추가 프레임 */
+#dashboardUpdateAddImage {
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    border-radius: 5px;
+    border: 1px dashed #dbd9db
+}
+
+/* Dashboard-Update 페이지의 사진추가 프레임 속 상부 프레임 */
+#dashboardUpdateAddImage > div:first-child{
+    margin-top: 60px;
+    margin-bottom: 30px;
+}
+
+/* Dashboard-Update 페이지의 사진추가 프레임 속 상부 프레임 속 이미지 */
+#dashboardUpdateAddImage img {
+    width : 115px;
+    max-width: 100%;
+    height: auto;
+    border-style : none;
+}
+
+/* Dashboard-Update 페이지의 사진추가 프레임 속 하부 프레임 */
+#dashboardUpdateAddImage > div:nth-child(2) {
+    margin-bottom: 60px;
+}
+
+/* Dashboard-Update 페이지의 사진추가 프레임 속 하부 프레임 속 input : file */
+#dashboardUpdateAddImage > div:nth-child(2) > input {
+    display: block;
+    clip : rect(0 0 0 0);
+    clip-path: iset(50%);
+    height: 1px;
+    width: 1px;
+    padding: 0px;
+    border: 0px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+}
+
+/* Dashboard-Update 페이지의 사진추가 프레임 속 하부 프레임 속 lable */
+#dashboardUpdateAddImage > div:nth-child(2) > label {
+    height: 48px;
+
+    padding: 12px 16px;
+    border: 1px solid #dbd9db;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.07);
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    cursor: pointer;
+}
+
+/* Dashboard-Update 페이지의 사진추가 프레임 속 하부 프레임 속 lable 속 span(Upload an image) */
+#dashboardUpdateAddImage > div:nth-child(2) > label > span {
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.note_editor {
+    width: 100% !important;
+}
+
+.dashboard-update-text-guide {
+    margin-top: 20px;
+}
+
+.dashboard-update-text-guide > div{
+    display: block;
+    font-size: 12px;
+    text-align: left;
+    color: #737273;
+}
+
+
+
+/* 저장, 취소 버튼을 담은 프레임 */
+.submit-cancel-button-frame {
+    margin-top: 25px !important;
+    margin-bottom: 25px !important;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* 저장, 취소 버튼 클래스*/
+.submit-cancel-button {
+    display: inline-block;
+    width: 80px;
+    height: 40px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 10px;
+    border : 2px solid #2DB400;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.07);
+    cursor : pointer;
+    margin: 5px;
+}
+
+/* 저장 버튼 */
+#submit{
+    background-color: #2DB400;
+    color: #ffffff;
+}
+
+/* 취소 버튼 */
+#cancel{
+    background-color: #ffffff;
+    color: #2DB400;
+}
+
+
+
+
+
+
+
+/* 이미지 미리보기 화면 */           
+#imageContainer {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: block;
+    border: 1px solid #ccc;
+}
+
+/* 업로드 포토 라벨 */  
+.upload-photo {
+    display: block;
+    color: #E01A2B;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-bottom: 50px;
+    margin-top: 25px;
+    text-align: center !important;
+}
+

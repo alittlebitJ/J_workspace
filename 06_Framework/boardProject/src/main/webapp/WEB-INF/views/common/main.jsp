@@ -48,7 +48,7 @@
 
                             <fieldset class="id-pw-area">
                                 <section>
-                                    <input type="text" name="memberEmail" placeholder="이메일" autocomplete="off">
+                                    <input type="text" name="memberEmail" placeholder="이메일" autocomplete="off" value="${cookie.saveId.value}">
                                     <input type="password" name="memberPw" placeholder="비밀번호">                  
                                 </section>
                                 <section>
@@ -57,7 +57,18 @@
                             </fieldset>
 
                             <label>
+<%--                                 <c:if test="${empty cookie.saveId.value}" >
                                 <input type="checkbox" name="saveId"> 아이디 저장
+                                </c:if>
+                                <c:if test="${not empty cookie.saveId.value}" >
+                                <input type="checkbox" name="saveId" checked> 아이디 저장
+                                </c:if> --%>
+
+                                <c:if test="${not empty cookie.saveId.value}" >
+                                    <%-- 쿠키에 저장된 이메일이 있으면 save 변수를 선언 (page scope) --%>
+                                    <c:set var="save" value="checked"/>
+                                </c:if>
+                                <input type="checkbox" name="saveId" ${save}> 아이디 저장
                             </label>
 
                             <article class="signup-find-area">
@@ -94,6 +105,7 @@
     <%-- footer --%>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
-
+    <%-- main.js추가 --%>
+    <script src="/resources/js/main.js"></script>
 </body>
 </html>
