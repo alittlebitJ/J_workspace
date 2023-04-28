@@ -76,6 +76,32 @@
 	<!-- AND MEMBER_PW = #{memberPw} 암호화로 인해 db에 함호회된 비밀번호가 저장되어 있으므로 뺌--> 
   </select>
   
+  <!-- 회원 가입 -->
+  
+  <!--
+  	insert,update,delete와 같은 DML 구문은
+  	수행 결과가 항상 성공한 행의 개수 (int 자료형)으로 고정
+  	-> resultType을 작성하지 않는다
+  -->
+  
+  
+  					<!--원래는 "edu.kh.project.member.model.dto.member"-->
+  					<!--mybatis-config.xml에 지정된 별칭-->
+  <insert id="signUp" parameterType="Member">
+  	INSERT INTO "MEMBER"
+	VALUES (SEQ_MEMBER_NO.NEXTVAL,
+			#{memberEmail},
+			#{memberPw},
+			'${memberNickname}',
+			#{memberTel},
+			#{memberAddress},
+			NULL,
+			DEFAULT, 
+			DEFAULT, 
+			DEFAULT)
+  </insert>
+  
+  
   
   
 </mapper>

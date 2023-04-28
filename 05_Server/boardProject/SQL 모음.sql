@@ -97,7 +97,7 @@ COMMIT;
 
 
 
-
+SELECT * FROM "MEMBER" ;
 
 
 

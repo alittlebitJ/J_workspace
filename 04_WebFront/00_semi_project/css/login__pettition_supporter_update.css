@@ -133,9 +133,14 @@
     cursor: pointer;
 }
 
-
+/* 써머노트 넓이 */
 .note_editor {
     width: 100% !important;
+}
+
+/* 써머노트 툴바 죄측 정렬 */
+.note-toolbar {
+    text-align: left !important;
 }
 
 .dashboard-update-text-guide {
@@ -148,8 +153,6 @@
     text-align: left;
     color: #737273;
 }
-
-
 
 /* 저장, 취소 버튼을 담은 프레임 */
 .submit-cancel-button-frame {
@@ -173,6 +176,50 @@
     margin: 5px;
 }
 
+/* 이메일 미리보기 버튼 */
+.preview {
+    width: 120px;
+}
+
+/* 모달창 */
+.modal {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: none;
+
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal.show {
+    display: block;
+}
+
+.modal-body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 400px;
+    height: 600px;
+
+    padding: 40px;
+
+    text-align: center;
+
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+    transform: translateX(-50%) translateY(-50%);
+    
+}
+
+
 /* 저장 버튼 */
 #submit{
     background-color: #2DB400;
@@ -184,7 +231,6 @@
     background-color: #ffffff;
     color: #2DB400;
 }
-
 
 
 
@@ -211,4 +257,3 @@
     margin-top: 25px;
     text-align: center !important;
 }
-
