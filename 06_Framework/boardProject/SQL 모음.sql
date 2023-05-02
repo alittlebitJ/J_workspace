@@ -10,7 +10,7 @@ GRANT CONNECT, RESOURCE, CREATE VIEW TO project;
 
 -- 객체 생성 공간 할당
 ALTER USER project DEFAULT TABLESPACE SYSTEM
-QUOTA UNLIMITED ON SYSTEM;
+QUOTA UNLIMITED ON SYSTEM
 
 
 
@@ -88,10 +88,15 @@ AND MEMBER_PW = ?
 
 
 
+-- 회원번호가 일치하는 회원의 비밀번호 조회
+SELECT * FROM "MEMBER";
 
+-- 회원 번호가 일치하는 회원의 비밀번호 변경
 
-
-
+UPDATE "MEMBER"
+SET MEMBER_DEL_FL  = ?
+WHERE MEMBER_NO = ? 
+;
 
 
 
