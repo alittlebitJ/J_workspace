@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -14,6 +17,7 @@
 <body>
     <main>
         <header>
+            <jsp:include page="/WEB-INF/views/common/header.jsp"/>
         </header>
         <nav>
         </nav>
@@ -32,9 +36,10 @@
                 </ul> 
             </div>
         </div>
+        <footer>
+            <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+        </footer>
     </main>
-    <footer>
-    </footer>
     <script src="/04_WebFront/00_semi_project/js/login_mypettitions.js">
     </script>
 </body>
