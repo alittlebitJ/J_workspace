@@ -56,13 +56,40 @@
                     </div>
                 </div>
                 <div id="goRight">
-                    <div class="submit-cancel-button-frame">
-                        <div class="modal">
-                            <div class="modal-body">
-                                <div class="modal-title">Modal1</div>
-                                <button id="closeModal" onclick="openModal();" type="button"></button>
+                    <!-- 모달창 -->
+                    <div id="modal" class="modal-overlay">
+                        <div class="modal-window">
+                            <div class="modal-title-container">
+                                <div class="modal-title">업데이트 이메일 미리보기</div>
+                                <div class="modal-subtitle">지원자의 받은 편지함에 메세지가 어떻게 표시되는지 확인하십시오</div>
+                            </div>
+                            <div class="modal-content-container">
+                                <div class="modal-content-title">업데이트한당</div>
+                                <div class="modal-content-title-profile">
+                                    <img src="/00_semi_project/images/user.png" alt="user">
+                                    <div>
+                                        <p>사용자이름</p>
+                                        <p>to 나에게</p>
+                                    </div>  
+                                </div>
+                                <div>
+                                    <img src="" alt="">
+                                    <p></p>
+                                </div>
+                                <div class = modal-content>
+                                    <p>가나다라마바사 아자차카타파하</p>
+                                    <p>가나다라마바사 아자차카타파하</p>
+                                    <p>가나다라마바사 아자차카타파하</p>
+                                    <p>가나다라마바사 아자차카타파하</p>
+                                </div>
+                            </div>    
+                            <div class="close-area">
+                                <button>미리보기 닫기</button>
                             </div>
                         </div>
+                    </div>
+                    <!-- 모달창 끝 -->
+                    <div class="submit-cancel-button-frame">
                         <button id="submit" class="submit-cancel-button preview" type="button">이메일 미리보기</button>
                         <button id="cancel" class="submit-cancel-button">포스트</button>
                     </div>
