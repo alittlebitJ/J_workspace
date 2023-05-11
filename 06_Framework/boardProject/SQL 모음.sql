@@ -669,6 +669,69 @@ AND MEMBER_NO = 1
 
 
 
+-----------------------
+-- 한 번에 여러 개 INSERT 하기
+-- INSERT ALL : 여러 테이블에 동시에 INSERT를 하는 구문 (시퀀스 생성 구문을 작성하지 못 함) -> 적합하지 않음
+-- INSERT ALL 테이블 VALUES(), 테이블 VALUES(), 테이블 VALUES()..
+
+-- INSERT + SUB QUERY
+INSERT INTO "BOARD_IMG"
+SELECT SEQ_IMG_NO.NEXTVAL, A.* 
+FROM (
+	SELECT '웹접근경로' IMG_PATH, '변경명' IMG_RENAME , '원본명' IMG_ORIGINAL, 0 IMG_ORDER , 1500 BOARD_NO 
+	FROM DUAL
+	
+	UNION ALL -- 두 SELECT 문의 결과를 한 번에 보여줘라
+	
+	SELECT '웹접근경로' IMG_PATH, '변경명' IMG_RENAME , '원본명' IMG_ORIGINAL, 1 IMG_ORDER , 1500 BOARD_NO 
+	FROM DUAL
+	
+	UNION ALL
+	
+	SELECT '웹접근경로' IMG_PATH, '변경명' IMG_RENAME , '원본명' IMG_ORIGINAL, 2 IMG_ORDER , 1500 BOARD_NO 
+	FROM DUAL
+) A
+;
+
+
+SELECT * FROM BOARD_IMG ORDER BY IMG_NO DESC;
+
+ROLLBACK;
+
+
+
+SELECT '웹접근경로' IMG_PATH, '변경명' IMG_RENAME , '원본명' IMG_ORIGINAL, 0 IMG_ORDER , 1500 BOARD_NO 
+FROM DUAL
+
+UNION ALL -- 두 SELECT 문의 결과를 한 번에 보여줘라
+
+SELECT '웹접근경로' IMG_PATH, '변경명' IMG_RENAME , '원본명' IMG_ORIGINAL, 1 IMG_ORDER , 1500 BOARD_NO 
+FROM DUAL
+
+UNION ALL
+
+SELECT '웹접근경로' IMG_PATH, '변경명' IMG_RENAME , '원본명' IMG_ORIGINAL, 2 IMG_ORDER , 1500 BOARD_NO 
+FROM DUAL
+;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

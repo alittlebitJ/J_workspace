@@ -22,6 +22,9 @@ signed.addEventListener("click", () => {
 });
 
 
+
+
+
 function myPettitionTabs(num) {
       // defaultbox를 만들어 DB에 작성된 내 작성글 중 하나를 입력
       // 만약 이미 start/signed 버튼을 눌러 내 start/signed가 나와있는 화면이면 기존 div 다 삭제하고 다시 생성
@@ -31,6 +34,7 @@ function myPettitionTabs(num) {
             e.parentNode.removeChild(e);
         });
       }
+
       for(let i = 0; i < num; i++){ // DB에 있는 내 작성 청원 개수를 매개변수로 받아와 개수만큼 실행
         // defaultbox 생성(큰 틀 생성)
         const defaultbox = document.createElement("div");
