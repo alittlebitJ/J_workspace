@@ -58,3 +58,36 @@ boardLike.addEventListener("click", e => {
 
 
 });
+
+
+// 게시글 수정버튼 클릭 시
+document.getElementById("updateBtn").addEventListener("click", () => {
+
+    location.href = location.pathname.replace("board", "board2") + "/update" + location.search
+    // /board2/3/1506/update?cp=1 (location.href도 GET방식 요청)
+
+});
+
+// 게시글 삭제버튼 클릭 시
+document.getElementById("deleteBtn").addEventListener("click", () => {
+
+    if(confirm("정말 삭제 하시겠습니까?")) {
+        location.href = location.pathname.replace("board", "board2") + "/delete"
+        // /board2/3/1506/delete
+
+        // 삭제 서비스 호출 성공 시 redirect:/board/{boardCode} 
+        // + RedirectAttributes를 이용해 "삭제 되었습니다." alert 출력
+
+
+        // 삭제 서비스 호출 실패 시 redirect:/board/{boardCode} 
+        // + RedirectAttributes를 이용해 "삭제 실패." alert 출력
+
+
+
+
+
+
+    }
+
+
+});

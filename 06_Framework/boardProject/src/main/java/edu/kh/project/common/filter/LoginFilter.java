@@ -19,7 +19,7 @@ import edu.kh.project.member.model.dto.Member;
 // 클라이언트의 요청이 Dispatcher Servlet에 도달하기 직전에 있다
 // @WebFilter : 해당 클래스를 필터로 등록하고, 지정된 주소 요청이 올 때 마다 동작
 @WebFilter(filterName = "loginFilter",
-		   urlPatterns = {"/myPage/*"}) // {"/myPage/*, /board/*"} 여러개 작성도 가능
+		   urlPatterns = {"/myPage/*", "/board2/*"}) // {"/myPage/*, /board/*"} 여러개 작성도 가능
 public class LoginFilter implements Filter {
 
 	/*
