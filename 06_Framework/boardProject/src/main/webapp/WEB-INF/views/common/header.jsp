@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="/resources/css/main-style.css">
     <!-- font awesome 라이브러리 추가 + key 등록 -->
     <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
-
+    <script src="/resources/js/header.js"></script>
 
  <header>
 
@@ -26,7 +26,7 @@
                         - POST : input태그 값을 주소에 담지 않고 제출(주소에 안보임)
                                 -> HTTP Body에 담아서 제출
                     -->
-                    <form action="#" method="GET">
+                    <form action="/board/1" method="GET">
 
                         <fieldset> <!-- form태그 내 영역 구분 -->
 
@@ -37,8 +37,9 @@
                             -->
                             <input type="search" name="query" id="query"
                             placeholder="검색어를 입력해주세요."
-                            autocomplete="off">
-
+                            autocomplete="off" value="${param.query}">
+                            <%-- 검색을 하면 1번 게시판에서 제목 검색을 하게 --%>
+                            <input type="hidden" name="key" value="t"> 
                             <!-- 검색 버튼 -->
                             <!-- button type="submit" 이 기본값 -->
                             <button id="searchBtn" class="fa-solid fa-magnifying-glass"></button>
@@ -46,6 +47,9 @@
                         </fieldset>
 
                     </form>
+                    <%-- 검색창 자동완성  --%>
+                    <%-- 조회수 높고, 같으면 최신글 순서 --%>
+                    <ul id="searchResult" class="close"></ul>
 
                 </article>
 
@@ -85,7 +89,6 @@
 
         <nav>
             <ul>
-
                 <%-- interceptor를 이용해서 조회된 boardTypeList를 application scope에서 얻어와 화면에 출력 --%>
 
                 <c:forEach var="boardType" items="${boardTypeList}" >
@@ -98,8 +101,7 @@
                 <c:if test="${not empty loginMember}" >
                     <li><a href="/chatting">채팅</a></li>
                 </c:if>
-
-
-
             </ul>
         </nav>
+    
+    

@@ -12,36 +12,31 @@ import edu.kh.project.board.model.dto.BoardImage;
 
 @Repository
 public class BoardDAO2 {
-
+	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	/**	게시글 삽입
+	/** 게시글 삽입
 	 * @param board
 	 * @return boardNo
 	 */
 	public int boardInsert(Board board) {
-		
 		int result = sqlSession.insert("boardMapper.boardInsert", board);
+		// -> sql 수행 후 매개변수 board 객체에는 boardNo 존재 O/X
 		
-		// sql 수행 후 매개변수 board 객체에는 boardNo가 존재 (얉은 복사로 매개변수가 넘어감, mapper에서 board 주소에 sequence.nextval 대입
 		// 삽입 성공 시
-		if(result > 0) result = board.getBoardNo(); 
+		if(result > 0) result = board.getBoardNo();
 		
 		return result; // 삽입 성공 시 boardNo, 실패 시 0 반환
 	}
 
-	
-	
-	/** 게시물에 첨부된 이미지 여러개 삽입
+	/** 이미지 리스트(여러 개) 삽입
 	 * @param uploadList
 	 * @return result
 	 */
 	public int insertImageList(List<BoardImage> uploadList) {
 		return sqlSession.insert("boardMapper.insertImageList", uploadList);
 	}
-
-
 
 	/** 게시글 수정
 	 * @param board
@@ -51,8 +46,6 @@ public class BoardDAO2 {
 		return sqlSession.update("boardMapper.boardUpdate", board);
 	}
 
-
-
 	/** 이미지 삭제
 	 * @param deleteMap
 	 * @return rowCount
@@ -61,19 +54,16 @@ public class BoardDAO2 {
 		return sqlSession.delete("boardMapper.imageDelete", deleteMap);
 	}
 
-
-
-	/** 이미지 업데이트
-	 * @param img
+	
+	/** 이미지 수정
+ 	 * @param img
 	 * @return rowCount
 	 */
 	public int imageUpdate(BoardImage img) {
 		return sqlSession.update("boardMapper.imageUpdate", img);
 	}
 
-
-
-	/** 이미지 삽입 (1개)
+	/** 이미지 삽입(1개)
 	 * @param img
 	 * @return rowCount
 	 */
@@ -81,14 +71,14 @@ public class BoardDAO2 {
 		return sqlSession.insert("boardMapper.imageInsert", img);
 	}
 
-
-
 	/** 게시글 삭제
-	 * @param board
+	 * @param map
 	 * @return result
 	 */
-	public int boardDelete(Board board) {
-		return sqlSession.update("boardMapper.boardDelete", board);
+	public int boardDelete(Map<String, Object> map) {
+		return sqlSession.update("boardMapper.boardDelete", map);
 	}
+	
+	
 	
 }

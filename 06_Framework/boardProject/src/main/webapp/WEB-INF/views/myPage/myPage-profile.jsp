@@ -50,11 +50,10 @@
                             <img src="/resources/images/user.png" id="profileImage">
                         </c:if>
 
-                        <%-- 프로필 이미지가 있으면 있는 이미지 --%>
+                        <%-- 프로필 이미지가 있으면 있는 이미지 --%>    
                         <c:if test="${not empty loginMember.profileImage}" >
                             <img src="${loginMember.profileImage}" id="profileImage">
                         </c:if>
-
                     </div>
                     <span id="deleteImage">x</span>
 

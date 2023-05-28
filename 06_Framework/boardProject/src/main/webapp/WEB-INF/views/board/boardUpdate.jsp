@@ -22,51 +22,56 @@
     <main>
         <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
-                                                <%-- 파일을 보낼 때엔 무조건 POST 방식 --%>
-                            <%-- boardCode : @PathVariable로 Controller에서 등록해놨던 것 --%>
-        <form action="/board2/${boardCode}/insert" method="POST" class="board-write" id="boardWriteFrm" enctype="multipart/form-data">  
-        <%-- enctype="multipart/form-data" : 제출 데이터를 인코딩 하지 말아라 
-                                            -> 파일 제출 가능, MultiPartResolver가 문자열, 파일을 구분
-                                               (문자열은 String, int, DTO, Map(HttpMessageConverter) 등등으로
-                                               파일은 MultiPartFile객체로 transferTo()를 통해 파일을 서버에 저장) --%>
+        <!--
+        상대경로
+        /board2/1/2006/update?cp=1  (GET)
+        /board2/1/2006/update (POST) 
+        -->
+        <form action="update" method="POST" 
+            class="board-write" id="boardUpdateFrm" enctype="multipart/form-data">  
+            <%-- enctype="multipart/form-data : 제출 데이터 인코딩 X
+                    -> 파일 제출 가능 
+                    -> MultiPartResolver가 문자열, 파일을 구분
+                    --> 문자열 -> String, int , DTO, Map (HttpMessageConverter)
+                    --> 파일 -> MultiPartFile 객체 -> transferTo() (파일을 서버에 저장)
+            --%>
+
             <h1 class="board-name">${boardName}</h1>
 
             <!-- 제목 -->
             <h1 class="board-title">
-                <input type="text" name="boardTitle" placeholder="제목" value="${board.boardTitle}">
+                <input type="text" name="boardTitle" placeholder="제목" value="${board.boardTitle}">   
             </h1>
 
 
-            <%-- board.imageList에 존재하는 이미지 객체를 얻어와 순서(imageOrder) 별로 변수 생성 --%>
-            <%-- for문으로 해도 됨 --%>
+            <%--  
+                board.imageList에 존재하는 이미지 객체를 얻어와
+                순서(imageOrder) 별로 변수 생성
+            --%>
+
             <c:forEach items="${board.imageList}" var="img">
-
                 <c:choose>
-                   
-                   <c:when test="${img.imageOrder == 0}">
-                     <c:set var="img0" value="${img.imagePath}${img.imageReName}"/>
-                   </c:when>
+                    <c:when test="${img.imageOrder == 0}">
+                        <c:set var="img0" value="${img.imagePath}${img.imageReName}"/>
+                    </c:when>
 
-                   <c:when test="${img.imageOrder == 1}">
-                     <c:set var="img1" value="${img.imagePath}${img.imageReName}"/>
-                   </c:when>
-                   
-                   <c:when test="${img.imageOrder == 2}">
-                     <c:set var="img2" value="${img.imagePath}${img.imageReName}"/>
-                   </c:when>
+                    <c:when test="${img.imageOrder == 1}">
+                        <c:set var="img1" value="${img.imagePath}${img.imageReName}"/>
+                    </c:when>
 
-                   <c:when test="${img.imageOrder == 3}">
-                     <c:set var="img3" value="${img.imagePath}${img.imageReName}"/>
-                   </c:when>
-                   
-                   <c:when test="${img.imageOrder == 4}">
-                     <c:set var="img4" value="${img.imagePath}${img.imageReName}"/>
-                   </c:when>
+                    <c:when test="${img.imageOrder == 2}">
+                        <c:set var="img2" value="${img.imagePath}${img.imageReName}"/>
+                    </c:when>
 
+                    <c:when test="${img.imageOrder == 3}">
+                        <c:set var="img3" value="${img.imagePath}${img.imageReName}"/>
+                    </c:when>
+
+                    <c:when test="${img.imageOrder == 4}">
+                        <c:set var="img4" value="${img.imagePath}${img.imageReName}"/>
+                    </c:when>
                 </c:choose>
-
             </c:forEach>
-
 
 
             <!-- 썸네일 영역 -->
@@ -80,8 +85,6 @@
                     <span class="delete-image">&times;</span>
                 </div>
             </div>
-
-
 
 
             <!-- 업로드 이미지 영역 -->
@@ -127,25 +130,17 @@
             </div>
 
 
-             <!-- 버튼 영역 -->
+            <!-- 버튼 영역 -->
             <div class="board-btn-area">
                 <button type="submit" id="writebtn">등록</button>
             </div>
 
-
-
-
-
-
-            <%-- 기존 이미지가 있다가 삭제된 이미지의 순서를 기록 --%>
+            
+            <!-- 기존 이미지가 있다가 삭제된 이미지의 순서를 기록-->
             <input type="hidden" name="deleteList" value="">
 
-            <%-- 수정 성공 시 주소(쿼리스트링) 유지용 --%>
+            <%-- 수정 성공 시 주소(쿼리스트링) 유지용도 --%>
             <input type="hidden" name="cp" value="${param.cp}">
-
-
-
-            
         </form>
 
     </main>
