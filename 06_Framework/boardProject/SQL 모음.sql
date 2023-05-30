@@ -14,7 +14,7 @@ QUOTA UNLIMITED ON SYSTEM
 
 
 
-------------- [ project ] -------------
+------------- [ project ] ----------
 
 DROP TABLE "MEMBER";
 
