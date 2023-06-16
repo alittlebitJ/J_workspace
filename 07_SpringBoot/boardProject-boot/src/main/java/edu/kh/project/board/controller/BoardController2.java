@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +25,7 @@ import edu.kh.project.board.model.dto.Board;
 import edu.kh.project.board.model.service.BoardService;
 import edu.kh.project.board.model.service.BoardService2;
 import edu.kh.project.member.model.dto.Member;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/board2")
