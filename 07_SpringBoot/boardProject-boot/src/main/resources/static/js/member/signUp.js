@@ -258,7 +258,7 @@ memberNickname.addEventListener("input", () => {
     if(regEx.test(memberNickname.value)) { // 유효
 
 
-        fetch("/dupCheck/nickame?nickname=" + memberNickname.value)
+        fetch("/dupCheck/nickname?nickname=" + memberNickname.value)
         .then( response => response.text() )  // 응답 객체를 text로 파싱(변환)
         .then( count => {
             if(count == 0) { // 중복이 아닌 경우
