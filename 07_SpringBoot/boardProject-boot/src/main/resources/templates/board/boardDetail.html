@@ -73,46 +73,58 @@
                     <h5>썸네일</h5>
                     <div class="img-box">
                         <div class="boardImg thumbnail">
+
                             <img th:src="|${thumbnail.imagePath}${thumbnail.imageReName}|">                     
+                            
                             <a th:href="|${thumbnail.imagePath}${thumbnail.imageReName}|"
                                 th:download="${thumbnail.imageOriginal}">다운로드</a>         
                         </div>
                     </div>
                 </th:block>
 
+
                 <!-- 일반 이미지가 있을 경우 -->
-                <th:block th:if="${#lists.size(board.imageList) > start}">
+                <th:block th:if="${#lists.size(board.imageList) > start}" >
+
                     <!-- 업로드 이미지 영역 -->
                     <h5>업로드 이미지</h5>
                     <div class="img-box">
-                        <th:block th:each="i : ${#numbers.sequence(start, #lists.size(board.imageList) - 1 , 1)}">    
-                            <div class="boardImg" th:with="path=|${board.imageList[i].imagePath}${board.imageList[i].imageReName}|">
+                        
+                        <th:block th:each="i : ${#numbers.sequence(start, #lists.size(board.imageList) - 1 , 1)}">        
+
+                            <div class="boardImg" 
+                                th:with="path=|${board.imageList[i].imagePath}${board.imageList[i].imageReName}|">
+
                                 <img th:src="${path}">   
+
                                 <a th:href="${path}" 
                                     th:download="${board.imageList[i].imageOriginal}">다운로드</a>                
                             </div>
                         </th:block>
+
+
                     </div>
                 </th:block>
             </th:block>
 
-
             <!-- 내용 -->
-            <div class="board-content" th:text="${board.boardContent}"></div>
+            <div class="board-content" th:text="${board.boardContent}">내용</div>
+
+
             <!-- 버튼 영역-->
             <div class="board-btn-area">
 
-
                 <!-- 로그인한 회원과 게시글 작성자 번호가 같은 경우-->
-                <th:block th:if="${session.loginMember != null and session.loginMember.memberNo == board.memberNo}" >
-                    <!-- <th:block th:if="${session.loginMember?.memberNo==board.memberNo}"></th:block> 
-                        ? (객체?.필드명) : 앞에 있는 객체가 null이 아닌지 알려주는 연산자(thymeleaf, ruby정도의 언어에서만 쓰임)
-                    safe navigation operator  객체가 null인지 탐색해서 null이 아닌 경우 필드 접근 방지 -->
+                <!-- <th:block th:if="${session.loginMember != null and session.loginMember.memberNo == board.memberNo}" > -->
+
+                <!-- 객체?.필드명 : Safe Navigation Operator
+                    객체가 null인지 탐색(확인)해서 null이 아닐 경우 필드 접근
+                    (NullPointerException 방지)
+                -->
+                <th:block th:if="${session.loginMember?.memberNo==board.memberNo}">
                     <button id="updateBtn">수정</button>
                     <button id="deleteBtn">삭제</button>
                 </th:block>
-
-
 
                 <button id="goToListBtn">목록으로</button>
             </div>
@@ -140,15 +152,18 @@
         전역 변수로 선언해두기
     -->
 
-    <script th:inline="javascript"> // 이 안에 thymeleaf를 쓰면 javascript로 바꿔 주겠다
-        // console.log(/*[[${board}]]*/ "board객체")
-        const boardNo = /*[[${board.boardNo}]]*/"게시글 번호";
-        const loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/"로그인 회원 번호";
+    <script th:inline="javascript">
+        //console.log(/*[[${board}]]*/ "board객체");
+
+        const boardNo = /*[[${board.boardNo}]]*/ "게시글 번호";
+
+        let loginMemberNo = /*[[${session.loginMember?.memberNo}]]*/ "로그인 회원 번호";
 
         if(loginMemberNo == null) loginMemberNo = "";
 
         console.log(boardNo);
         console.log(loginMemberNo);
+
     </script>
 
     <script th:src="@{/js/board/boardDetail.js}"></script>

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import edu.kh.project.board.model.dao.BoardDAO2;
+import edu.kh.project.board.model.dao.BoardMapper2;
 import edu.kh.project.board.model.dto.Board;
 import edu.kh.project.board.model.dto.BoardImage;
 import edu.kh.project.board.model.exception.FileUploadException;
@@ -23,22 +23,20 @@ import edu.kh.project.common.utility.Util;
 public class BoardServiceImpl2 implements BoardService2{
 
 	@Autowired
-	private BoardDAO2 dao;
+	private BoardMapper2 mapper;
 
 	
 	// 게시글 삽입
 	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int boardInsert(Board board, List<MultipartFile> images, String webPath, String filePath) throws IllegalStateException, IOException {
-		
-		// 0. XSS 방지 처리
-		board.setBoardContent( Util.XSSHandling( board.getBoardContent() ) );
-		board.setBoardTitle( Util.XSSHandling( board.getBoardTitle() ) );
-		
-		
+
 		// 1. BOARD 테이블 INSERT 하기 (제목 ,내용, 작성자, 게시판코드)
 		//  -> boardNo (시퀀스로 생성한 번호) 반환 받기
-		int boardNo = dao.boardInsert(board);
+      int result = mapper.boardInsert(board);
+      if(result  == 0) return 0;
+      int boardNo = board.getBoardNo();
+
 		
 		
 		// 2. 게시글 삽입 성공 시
@@ -85,7 +83,7 @@ public class BoardServiceImpl2 implements BoardService2{
 			if( !uploadList.isEmpty() ) {
 				
 				// BOARD_IMG 테이블에 INSERT하는 DAO 호출
-				int result = dao.insertImageList(uploadList);
+				result = mapper.insertImageList(uploadList);
 				// result == 삽입된 행의 개수 == uploadList.size()	
 				
 				
@@ -131,7 +129,6 @@ public class BoardServiceImpl2 implements BoardService2{
 				}
 			}
 		}
-		
 		return boardNo;
 	}
 
@@ -149,7 +146,7 @@ public class BoardServiceImpl2 implements BoardService2{
 		board.setBoardContent( Util.XSSHandling( board.getBoardContent() ) );
 		
 		// 2) DAO 호출
-		int rowCount = dao.boardUpdate(board);
+		int rowCount = mapper.boardUpdate(board);
 		
 		
 		// 2. 게시글 부분이 수정 성공 했을 때
@@ -162,7 +159,7 @@ public class BoardServiceImpl2 implements BoardService2{
 				deleteMap.put("boardNo", board.getBoardNo());
 				deleteMap.put("deleteList", deleteList);
 				
-				rowCount = dao.imageDelete(deleteMap);
+				rowCount = mapper.imageDelete(deleteMap);
 				
 				if(rowCount == 0) { // 이미지 삭제 실패 시 전체 롤백
 									// -> 예외 강제로 발생
@@ -203,12 +200,12 @@ public class BoardServiceImpl2 implements BoardService2{
 					// 오라클은 다중 UPDATE를 지원하지 않기 때문에
 					// 하나씩 UPDATE 수행
 					
-					rowCount = dao.imageUpdate(img);
+					rowCount = mapper.imageUpdate(img);
 					
 					if(rowCount == 0) {
 						// 수정 실패 == DB에 이미지가 없었다 
 						// -> 이미지를 삽입
-						rowCount = dao.imageInsert(img);
+						rowCount = mapper.imageInsert(img);
 					}
 				}
 			}
@@ -237,7 +234,7 @@ public class BoardServiceImpl2 implements BoardService2{
 	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int boardDelete(Map<String, Object> map) {
-		return dao.boardDelete(map);
+		return mapper.boardDelete(map);
 	}
 	
 	
