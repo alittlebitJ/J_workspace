@@ -41,25 +41,25 @@ public class TodoController {
 	}
 	
 	
-	@PostMapping("/login")
+	@PostMapping("/login") 
 	public Map<String, Object> login(@RequestBody TodoMember member){
 		return service.login(member);
 	}
 	
 	
-	@PostMapping("/todo")
+	@PostMapping("/todo") // 삽입용
 	public int insert(@RequestBody Todo todo) {
 		return service.insert(todo);
 	}
 	
 	
-	@PutMapping("/todo")
+	@PutMapping("/todo") // 업데이트용
 	public int update(@RequestBody Todo todo) {
 		return service.update(todo);
 	}
 	
 	
-	@DeleteMapping("/todo")
+	@DeleteMapping("/todo") // 삭제용
 	public int delete(@RequestBody int todoNo) {
 		return service.delete(todoNo);
 	}

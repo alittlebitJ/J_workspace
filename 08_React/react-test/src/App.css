@@ -1,0 +1,7 @@
+#root {text-align: center;}
+
+div {
+  border: 1px solid black;
+  width: 80%;
+  margin: 5% 10%;
+}
